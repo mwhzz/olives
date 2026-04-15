@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ক্ষমতার মহাকাব্য — Olive Research Institute</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Noto+Sans+Bengali:wght@300;400;500;600;700;800&family=Cinzel:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══ RESET & VARS ═══ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f7f8fa;
+  --bg2:#eef0f3;
+  --white:#ffffff;
+  --olive:#2c5f2e;
+  --olive-l:#3d7a40;
+  --olive-d:#1a3d1c;
+  --olive-xl:rgba(44,95,46,.07);
+  --olive-glow:rgba(44,95,46,.28);
+  --gold:#c9952a;
+  --gold-l:#e5b84d;
+  --ink:#111827;
+  --ink-s:#374151;
+  --ink-m:#6b7280;
+  --ink-l:#9ca3af;
+  --red:#dc2626;
+  --green:#16a34a;
+  --bkash:#e2136e;
+  --bkash-l:rgba(226,19,110,.08);
+  --shadow:0 4px 20px rgba(0,0,0,.08);
+  --shadow-lg:0 12px 40px rgba(0,0,0,.12);
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Noto Sans Bengali',sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* BG CANVAS */
+#bgCanvas{position:fixed;inset:0;pointer-events:none;z-index:0;width:100%;height:100%}
+
+/* LAYOUT */
+.page{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:0 15px 130px}
+
+/* ANNOUNCE */
+.announce{
+  position:sticky;top:0;z-index:900;
+  background:linear-gradient(90deg,#1a3d1c,var(--olive),#1a3d1c);
+  background-size:200% auto;
+  animation:gradSlide 5s linear infinite;
+  color:#fff;text-align:center;
+  padding:11px 16px;
+  font-size:12.5px;font-weight:700;letter-spacing:.3px;
+}
+.announce strong{color:var(--gold-l)}
+@keyframes gradSlide{to{background-position:200% center}}
+
+/* HEADER */
+.site-header{display:flex;flex-direction:column;align-items:center;padding:22px 0 6px;gap:10px}
+.institute-badge{
+  display:inline-flex;align-items:center;gap:9px;
+  background:var(--white);
+  border:1.5px solid rgba(44,95,46,.2);
+  border-radius:50px;padding:7px 18px 7px 8px;
+  box-shadow:0 2px 10px rgba(0,0,0,.06);
+}
+.institute-dot{
+  width:30px;height:30px;
+  background:linear-gradient(135deg,var(--olive),var(--olive-l));
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:15px;
+}
+.institute-name{font-family:'Cinzel',serif;font-size:11px;letter-spacing:2.5px;color:var(--olive-d);text-transform:uppercase;font-weight:600}
+
+/* HERO */
+.hero{padding:24px 0 36px;display:flex;flex-direction:column;align-items:center;gap:28px}
+@media(min-width:640px){.hero{flex-direction:row;align-items:flex-start;gap:36px}}
+
+/* BOOK COVER */
+.book-wrap{position:relative;flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:14px}
+.book-badge{
+  position:absolute;top:-10px;right:-16px;z-index:5;
+  background:linear-gradient(135deg,var(--red),#f05252);
+  color:#fff;font-size:10px;font-weight:800;
+  padding:5px 14px;border-radius:50px;
+  box-shadow:0 4px 14px rgba(220,38,38,.4);
+  white-space:nowrap;
+  animation:popBadge 2.5s ease-in-out infinite;
+}
+@keyframes popBadge{0%,100%{transform:scale(1)}50%{transform:scale(1.09)}}
+.book-cover{
+  width:clamp(148px,40vw,195px);
+  height:clamp(210px,57vw,278px);
+  background:linear-gradient(155deg,#162b08 0%,#1f380f 35%,#162b08 65%,#243515 100%);
+  border-radius:3px 16px 16px 3px;
+  box-shadow:8px 8px 0 rgba(0,0,0,.22),18px 18px 50px rgba(0,0,0,.3),0 0 80px rgba(44,95,46,.12);
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:20px 14px;gap:7px;
+  cursor:default;
+  transition:transform .4s cubic-bezier(.25,.8,.25,1);
+}
+.book-cover:hover{transform:scale(1.04) rotate(-1.5deg)}
+.book-cover::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:12px;
+  background:linear-gradient(90deg,rgba(0,0,0,.5),rgba(0,0,0,.06),transparent);
+  z-index:2;
+}
+.book-cover::after{content:'';position:absolute;inset:0;background:linear-gradient(130deg,rgba(201,149,42,.12) 0%,transparent 55%)}
+.bc-shimmer{
+  position:absolute;top:0;left:0;width:35%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(229,184,77,.13),transparent);
+  animation:shimmer 4s ease-in-out infinite;z-index:4;
+}
+@keyframes shimmer{0%{transform:translateX(-100%) rotate(10deg)}100%{transform:translateX(380%) rotate(10deg)}}
+.bc-emblem{font-size:clamp(30px,8vw,42px);z-index:3;filter:drop-shadow(0 0 12px rgba(201,149,42,.65))}
+.bc-line{width:48px;height:1px;background:linear-gradient(90deg,transparent,var(--gold-l),transparent);z-index:3}
+.bc-sub{font-family:'Cinzel',serif;font-size:clamp(6.5px,1.8vw,8.5px);letter-spacing:2.5px;color:rgba(229,184,77,.48);text-transform:uppercase;z-index:3}
+.bc-title{font-family:'Playfair Display',serif;font-size:clamp(11px,3.2vw,15px);font-weight:900;color:#e8d5a0;text-align:center;line-height:1.4;z-index:3;text-shadow:0 2px 8px rgba(0,0,0,.4)}
+.bc-dots{display:flex;gap:4px;z-index:3}
+.bc-dot{width:3px;height:3px;background:var(--gold);border-radius:50%;opacity:.7}
+.bc-author{font-size:clamp(6px,1.7vw,8px);color:rgba(229,184,77,.42);letter-spacing:1.5px;text-transform:uppercase;z-index:3}
+.preview-link{
+  background:none;border:1.5px solid rgba(44,95,46,.3);color:var(--olive);
+  font-family:'Noto Sans Bengali',sans-serif;font-size:12px;font-weight:700;
+  cursor:pointer;padding:6px 16px;border-radius:50px;
+  transition:background .15s,color .15s;
+  text-decoration:none;display:inline-block;
+}
+.preview-link:hover{background:var(--olive);color:#fff}
+
+/* HERO CONTENT */
+.hero-content{flex:1;width:100%;text-align:center}
+@media(min-width:640px){.hero-content{text-align:left}}
+.hero-label{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--olive-xl);border:1px solid rgba(44,95,46,.18);
+  border-radius:50px;padding:4px 14px;
+  font-size:11px;font-weight:700;color:var(--olive);letter-spacing:.4px;
+  margin-bottom:10px;
+}
+.hero-h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(26px,7vw,46px);
+  font-weight:900;color:var(--ink);
+  line-height:1.15;margin-bottom:7px;
+}
+.hero-h1 em{color:var(--olive);font-style:normal}
+.hero-sub{
+  font-size:clamp(13.5px,3.3vw,16px);color:var(--ink-s);
+  line-height:1.65;margin-bottom:18px;
+}
+.hero-bullets{display:flex;flex-direction:column;gap:9px;margin-bottom:20px}
+.hb{display:flex;align-items:flex-start;gap:9px;font-size:13px;color:var(--ink-s)}
+.hb-icon{
+  width:20px;height:20px;
+  background:linear-gradient(135deg,var(--olive),var(--olive-l));
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:9.5px;color:#fff;flex-shrink:0;margin-top:1px;
+}
+.hero-price{
+  display:inline-flex;align-items:center;gap:12px;
+  background:var(--white);
+  border:2px solid rgba(220,38,38,.12);
+  border-radius:14px;padding:12px 20px;
+  box-shadow:var(--shadow);margin-bottom:18px;
+}
+.hp-old{font-size:13px;color:var(--ink-l);text-decoration:line-through;font-weight:600}
+.hp-new{font-family:'Playfair Display',serif;font-size:30px;font-weight:900;color:var(--red);line-height:1}
+.hp-badge{background:linear-gradient(135deg,var(--red),#f05252);color:#fff;font-size:10px;font-weight:800;padding:4px 10px;border-radius:50px}
+.cta-btn{
+  display:inline-flex;align-items:center;gap:9px;
+  background:linear-gradient(135deg,var(--olive-d),var(--olive),var(--olive-l));
+  background-size:200% auto;
+  color:#fff;border:none;border-radius:14px;
+  padding:15px 32px;
+  font-family:'Noto Sans Bengali',sans-serif;
+  font-size:15.5px;font-weight:800;cursor:pointer;
+  box-shadow:0 6px 24px var(--olive-glow);
+  animation:ctaPulse 2.5s ease-in-out infinite,gradMove 4s linear infinite;
+  transition:transform .2s;letter-spacing:.3px;
+}
+.cta-btn:hover{transform:translateY(-2px)}
+@keyframes ctaPulse{0%,100%{box-shadow:0 6px 24px var(--olive-glow)}50%{box-shadow:0 8px 36px rgba(44,95,46,.45)}}
+@keyframes gradMove{to{background-position:200% center}}
+
+/* STATS */
+.stats{
+  background:var(--white);border-radius:18px;
+  padding:18px 12px;box-shadow:var(--shadow);
+  margin-bottom:22px;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:6px;
+  border:1px solid rgba(44,95,46,.08);
+}
+@media(max-width:480px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{text-align:center;padding:4px 0}
+.stat-n{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(18px,5vw,26px);
+  font-weight:900;color:var(--olive);
+  display:block;line-height:1;
+}
+.stat-l{font-size:9.5px;color:var(--ink-m);margin-top:3px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+
+/* CARDS */
+.card{
+  background:var(--white);border-radius:20px;
+  border:1px solid rgba(0,0,0,.06);
+  box-shadow:var(--shadow);overflow:hidden;
+  margin-bottom:18px;position:relative;
+}
+.card-bar{
+  height:3px;
+  background:linear-gradient(90deg,var(--olive-d),var(--olive-l),var(--gold),var(--olive-l),var(--olive-d));
+  background-size:300% 100%;animation:barShift 4s ease infinite;
+}
+@keyframes barShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.card-body{padding:22px 22px 24px}
+.sec-label{
+  font-size:10px;font-weight:700;letter-spacing:2.5px;
+  color:var(--olive);text-transform:uppercase;
+  margin-bottom:10px;display:flex;align-items:center;gap:8px;
+}
+.sec-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(44,95,46,.3),transparent)}
+.card-heading{
+  font-family:'Playfair Display',serif;
+  font-size:18px;font-weight:700;color:var(--ink);
+  margin-bottom:14px;display:flex;align-items:center;gap:10px;
+}
+.ci{
+  width:36px;height:36px;
+  background:linear-gradient(135deg,var(--olive-xl),rgba(44,95,46,.12));
+  border:1px solid rgba(44,95,46,.18);
+  border-radius:10px;display:flex;align-items:center;justify-content:center;
+  font-size:17px;flex-shrink:0;
+}
+
+/* TEAM OLIVE */
+.olive-card{
+  background:linear-gradient(148deg,#162b08 0%,#1f380f 40%,#162b08 100%);
+  border-radius:20px;padding:26px 22px;
+  margin-bottom:18px;position:relative;overflow:hidden;color:#fff;
+}
+.olive-card::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='1.5' fill='%23c9952a' fill-opacity='0.1'/%3E%3C/svg%3E");
+  z-index:0;
+}
+.olive-glow{position:absolute;width:220px;height:220px;background:radial-gradient(circle,rgba(201,149,42,.1),transparent 70%);border-radius:50%;right:-50px;top:-50px;z-index:0}
+.olive-logo{display:flex;align-items:center;gap:11px;margin-bottom:16px;position:relative;z-index:1}
+.olive-emblem{
+  width:46px;height:46px;flex-shrink:0;
+  background:linear-gradient(135deg,#7a5c0a,var(--gold),var(--gold-l));
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:22px;box-shadow:0 4px 16px rgba(201,149,42,.35);
+}
+.olive-brand-n{font-family:'Cinzel',serif;font-size:14px;letter-spacing:3px;color:var(--gold-l);text-transform:uppercase;font-weight:700}
+.olive-brand-s{font-size:10.5px;color:rgba(229,184,77,.48);letter-spacing:1px;margin-top:1px}
+.olive-text{font-size:13.5px;line-height:1.85;color:rgba(255,255,255,.8);position:relative;z-index:1}
+.olive-text strong{color:var(--gold-l)}
+
+/* VOLUMES */
+.vol-item{
+  background:var(--white);border-radius:14px;
+  border:1px solid rgba(0,0,0,.07);
+  margin-bottom:10px;overflow:hidden;
+  transition:box-shadow .2s;
+}
+.vol-item:hover{box-shadow:0 4px 16px rgba(0,0,0,.09)}
+.vol-head{
+  display:flex;align-items:center;gap:13px;
+  padding:15px 16px;cursor:pointer;user-select:none;
+}
+.vol-n{
+  width:36px;height:36px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--olive),var(--olive-l));
+  border-radius:10px;display:flex;align-items:center;justify-content:center;
+  font-family:'Cinzel',serif;font-size:13px;font-weight:700;color:#fff;
+}
+.vol-info{flex:1}
+.vol-title{font-weight:700;font-size:13.5px;color:var(--ink)}
+.vol-ch{font-size:11px;color:var(--olive);margin-top:2px;font-weight:600}
+.vol-arr{font-size:11px;color:var(--ink-l);transition:transform .3s}
+.vol-item.open .vol-arr{transform:rotate(180deg)}
+.vol-body{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1)}
+.vol-item.open .vol-body{max-height:300px}
+.vol-content{padding:0 16px 16px 65px;font-size:12.5px;color:var(--ink-m);line-height:1.85}
+.vol-content strong{color:var(--ink-s)}
+
+/* WHY */
+.why{
+  background:linear-gradient(135deg,#f0f7f0,#e8f3e8);
+  border:1.5px solid rgba(44,95,46,.12);
+  border-radius:20px;padding:22px;margin-bottom:18px;
+}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+@media(max-width:460px){.why-grid{grid-template-columns:1fr}}
+.why-item{display:flex;align-items:flex-start;gap:9px}
+.wy-check{
+  width:22px;height:22px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--olive),var(--olive-l));
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:10.5px;color:#fff;margin-top:1px;
+}
+.wy-text{font-size:12.5px;color:var(--ink-s);line-height:1.5;font-weight:500}
+
+/* PRICING */
+.pricing{
+  background:var(--white);border-radius:20px;
+  border:2px solid rgba(220,38,38,.1);
+  overflow:hidden;margin-bottom:18px;
+  box-shadow:var(--shadow-lg);
+}
+.pricing-head{
+  background:linear-gradient(135deg,#1a3d1c,var(--olive));
+  padding:20px 22px;color:#fff;text-align:center;
+}
+.pricing-head h3{font-family:'Playfair Display',serif;font-size:21px;font-weight:900;margin-bottom:3px}
+.pricing-head p{font-size:12.5px;opacity:.78}
+.pricing-body{padding:22px}
+.price-row{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:18px}
+.pr-was{text-align:center}
+.pr-was span{display:block;font-size:11px;color:var(--ink-l);font-weight:600}
+.pr-was strong{font-size:19px;color:var(--ink-l);text-decoration:line-through}
+.pr-arrow{font-size:20px;color:var(--ink-l)}
+.pr-now{
+  text-align:center;
+  background:linear-gradient(135deg,#fff5f5,#ffe8e8);
+  border:2px solid rgba(220,38,38,.18);
+  border-radius:14px;padding:10px 22px;
+}
+.pr-now span{display:block;font-size:10.5px;color:var(--red);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:1px}
+.pr-now strong{font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:var(--red);line-height:1}
+.includes{display:flex;flex-direction:column;gap:9px;margin-bottom:18px}
+.inc-item{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--ink-s)}
+.inc-check{
+  width:20px;height:20px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--green),#4ade80);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:10px;color:#fff;
+}
+.buy-btn{
+  width:100%;padding:16px;
+  background:linear-gradient(135deg,var(--olive-d),var(--olive),var(--olive-l));
+  background-size:200% auto;
+  color:#fff;border:none;border-radius:13px;
+  font-family:'Noto Sans Bengali',sans-serif;
+  font-size:16.5px;font-weight:800;cursor:pointer;
+  box-shadow:0 6px 22px var(--olive-glow);
+  animation:ctaPulse 2.5s ease-in-out infinite,gradMove 4s linear infinite;
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  letter-spacing:.3px;
+}
+
+/* ORDER */
+#order-section{
+  background:var(--white);border-radius:20px;
+  border:1px solid rgba(0,0,0,.07);
+  box-shadow:var(--shadow);overflow:hidden;
+  margin-bottom:18px;
+}
+.order-head{background:linear-gradient(135deg,#1a3d1c,var(--olive));padding:18px 22px;color:#fff}
+.order-head h3{font-family:'Playfair Display',serif;font-size:19px;font-weight:700}
+.order-head p{font-size:12px;opacity:.72;margin-top:3px}
+.steps-tabs{display:flex;background:var(--bg2)}
+.step-tab{
+  flex:1;padding:11px 8px;text-align:center;
+  font-size:11.5px;font-weight:700;color:var(--ink-m);
+  border-bottom:2.5px solid transparent;transition:all .2s;
+}
+.step-tab.active{color:var(--olive);border-bottom-color:var(--olive);background:rgba(44,95,46,.05)}
+.step-tab.done{color:var(--green)}
+.order-body{padding:22px}
+.step-panel{display:none}
+.step-panel.active{display:block}
+.fg{margin-bottom:15px}
+.fl{display:block;font-size:11.5px;font-weight:700;color:var(--ink-s);margin-bottom:5px;letter-spacing:.3px}
+.fi{
+  width:100%;padding:11px 13px;
+  border:1.5px solid rgba(0,0,0,.1);border-radius:10px;
+  font-family:'Noto Sans Bengali',sans-serif;font-size:14px;
+  color:var(--ink);background:var(--bg);
+  transition:border-color .2s,box-shadow .2s;outline:none;
+}
+.fi:focus{border-color:var(--olive);box-shadow:0 0 0 3px var(--olive-xl);background:var(--white)}
+.fi::placeholder{color:var(--ink-l)}
+.next-btn{
+  width:100%;padding:13px;
+  background:linear-gradient(135deg,var(--olive),var(--olive-l));
+  color:#fff;border:none;border-radius:12px;
+  font-family:'Noto Sans Bengali',sans-serif;
+  font-size:14.5px;font-weight:700;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:transform .15s,box-shadow .15s;
+}
+.next-btn:hover{transform:translateY(-1px);box-shadow:0 4px 16px var(--olive-glow)}
+
+/* BKASH */
+.bkash-box{
+  background:var(--bkash-l);
+  border:1.5px solid rgba(226,19,110,.18);
+  border-radius:13px;padding:18px;
+  margin-bottom:16px;text-align:center;
+}
+.bkash-logo{
+  font-size:12.5px;font-weight:900;color:var(--bkash);
+  letter-spacing:.5px;margin-bottom:7px;
+  display:flex;align-items:center;justify-content:center;gap:5px;
+}
+.bkash-num{
+  font-family:'Playfair Display',serif;
+  font-size:22px;font-weight:900;color:var(--bkash);
+  letter-spacing:2px;margin-bottom:5px;
+}
+.bkash-amt{font-size:13px;color:var(--ink-s);font-weight:600}
+.bkash-amt strong{color:var(--bkash);font-size:15px}
+.bk-steps{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.bk-s{display:flex;gap:10px;align-items:flex-start}
+.bk-num{
+  width:22px;height:22px;flex-shrink:0;
+  background:var(--bkash);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:900;color:#fff;
+}
+.bk-t{font-size:12.5px;color:var(--ink-s);line-height:1.55}
+.bk-t strong{color:var(--ink)}
+.bk-done-btn{
+  width:100%;padding:13px;
+  background:linear-gradient(135deg,var(--bkash),#f06292);
+  color:#fff;border:none;border-radius:12px;
+  font-family:'Noto Sans Bengali',sans-serif;
+  font-size:14.5px;font-weight:700;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  box-shadow:0 4px 14px rgba(226,19,110,.28);
+  transition:transform .15s;
+}
+.bk-done-btn:hover{transform:translateY(-1px)}
+.verify-btn{
+  width:100%;padding:14px;
+  background:linear-gradient(135deg,var(--bkash),#f06292);
+  color:#fff;border:none;border-radius:12px;
+  font-family:'Noto Sans Bengali',sans-serif;
+  font-size:15px;font-weight:800;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  box-shadow:0 4px 16px rgba(226,19,110,.3);
+  animation:ctaPulse 2.5s ease-in-out infinite;
+  transition:transform .15s;
+}
+.verify-btn:hover{transform:translateY(-1px)}
+.verify-btn:disabled{opacity:.65;cursor:not-allowed;animation:none}
+.fi-hint{font-size:11px;color:var(--ink-m);margin-top:4px}
+
+/* PDF SECTION */
+#pdf-section{
+  display:none;
+  background:var(--white);border-radius:20px;
+  overflow:hidden;margin-bottom:18px;
+  box-shadow:var(--shadow-lg);
+  border:2px solid rgba(44,95,46,.12);
+  animation:pdfReveal .65s cubic-bezier(.34,1.56,.64,1) both;
+}
+@keyframes pdfReveal{
+  from{opacity:0;transform:scale(.88) translateY(24px)}
+  to{opacity:1;transform:scale(1) translateY(0)}
+}
+.pdf-head{
+  background:linear-gradient(135deg,#1a3d1c,var(--olive));
+  padding:16px 22px;color:#fff;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;
+}
+.pdf-head-l h3{font-family:'Playfair Display',serif;font-size:17px;font-weight:700}
+.pdf-head-l p{font-size:12px;opacity:.72;margin-top:2px}
+.pdf-dl-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--gold);color:#fff;
+  border:none;border-radius:9px;
+  padding:8px 16px;font-family:'Noto Sans Bengali',sans-serif;
+  font-size:12px;font-weight:700;cursor:pointer;
+  text-decoration:none;
+  box-shadow:0 2px 8px rgba(201,149,42,.35);
+  transition:transform .15s;
+}
+.pdf-dl-btn:hover{transform:translateY(-1px)}
+.pdf-success{
+  background:linear-gradient(135deg,#f0fdf4,#dcfce7);
+  border-bottom:1px solid rgba(22,163,74,.18);
+  padding:16px 22px;display:flex;align-items:center;gap:12px;
+}
+.pdf-ok-icon{
+  width:40px;height:40px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--green),#4ade80);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:18px;
+}
+.pdf-ok-text{font-size:13px;color:var(--ink-s)}
+.pdf-ok-text strong{color:var(--green);display:block;font-size:15px;margin-bottom:2px}
+.pdf-viewer-wrap{position:relative}
+.pdf-spinner-box{
+  height:280px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:13px;
+  color:var(--ink-m);font-size:13px;
+}
+.pdf-spinner{
+  width:36px;height:36px;
+  border:3px solid var(--bg2);border-top-color:var(--olive);
+  border-radius:50%;animation:spin 1s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.pdf-iframe{width:100%;height:600px;border:none;display:block}
+@media(max-width:600px){.pdf-iframe{height:420px}}
+
+/* PREVIEW MODAL */
+.modal{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.72);z-index:9000;
+  backdrop-filter:blur(8px);
+  align-items:center;justify-content:center;
+  padding:16px;
+}
+.modal.show{display:flex}
+.modal-box{
+  background:var(--white);border-radius:20px;
+  width:100%;max-width:680px;max-height:90vh;
+  overflow:hidden;
+  box-shadow:0 24px 80px rgba(0,0,0,.35);
+  animation:modalIn .4s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes modalIn{from{opacity:0;transform:scale(.85) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.modal-head{
+  background:linear-gradient(135deg,#1a3d1c,var(--olive));
+  padding:15px 20px;color:#fff;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.modal-head h4{font-family:'Playfair Display',serif;font-size:16px;font-weight:700}
+.modal-close{
+  width:30px;height:30px;
+  background:rgba(255,255,255,.15);
+  border:none;border-radius:50%;color:#fff;
+  font-size:14px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+}
+.modal-frame{width:100%;height:70vh;border:none;display:block}
+
+/* STICKY BAR */
+.sticky-bar{
+  position:fixed;bottom:0;left:0;right:0;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(16px);
+  border-top:1.5px solid rgba(44,95,46,.14);
+  padding:11px 16px;
+  display:flex;align-items:center;gap:12px;
+  z-index:800;
+  box-shadow:0 -4px 24px rgba(0,0,0,.1);
+  transform:translateY(100%);
+  transition:transform .4s cubic-bezier(.25,.8,.25,1);
+}
+.sticky-bar.show{transform:translateY(0)}
+.sb-l{flex:1;overflow:hidden}
+.sb-text{
+  font-size:13px;font-weight:700;color:var(--olive-d);
+  white-space:nowrap;
+  transition:opacity .28s;
+}
+.sb-price{
+  font-family:'Playfair Display',serif;
+  font-size:22px;font-weight:900;color:var(--red);line-height:1;margin-top:1px;
+}
+.sb-btn{
+  flex-shrink:0;
+  background:linear-gradient(135deg,var(--olive-d),var(--olive));
+  color:#fff;border:none;border-radius:12px;
+  padding:13px 20px;
+  font-family:'Noto Sans Bengali',sans-serif;
+  font-size:14px;font-weight:800;cursor:pointer;
+  white-space:nowrap;
+  box-shadow:0 4px 16px var(--olive-glow);
+  animation:ctaPulse 2.5s ease-in-out infinite;
+  display:flex;align-items:center;gap:6px;
+}
+@media(min-width:720px){
+  .sticky-bar{max-width:700px;margin:0 auto;bottom:14px;border-radius:16px;border:1.5px solid rgba(44,95,46,.18)}
+}
+.mt12{margin-top:12px}
+.mt8{margin-top:8px}
+.t-center{text-align:center}
+</style>
+</head>
+<body>
+
+<!-- BACKGROUND -->
+<canvas id="bgCanvas"></canvas>
+
+<!-- ANNOUNCE -->
+<div class="announce">
+  📢 সীমিত সময়ের অফার — <strong>মাত্র ১৭৮ টাকায়</strong> পুরো ৫ খণ্ডের গবেষণা সংকলন পান!
+</div>
+
+<div class="page">
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="institute-badge">
+    <div class="institute-dot">🫒</div>
+    <span class="institute-name">Olive Research Institute</span>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+
+  <!-- Book Cover -->
+  <div class="book-wrap">
+    <div class="book-badge">🆕 নতুন সংস্করণ</div>
+    <div class="book-cover">
+      <div class="bc-shimmer"></div>
+      <span class="bc-emblem">👑</span>
+      <div class="bc-line"></div>
+      <span class="bc-sub">Team Olive</span>
+      <div class="bc-title">ক্ষমতার<br>মহাকাব্য</div>
+      <div class="bc-dots"><span class="bc-dot"></span><span class="bc-dot"></span><span class="bc-dot"></span></div>
+      <span class="bc-author">Olive Research Institute</span>
+    </div>
+    <button class="preview-link" onclick="openPreview()">🔍 Preview দেখুন</button>
+  </div>
+
+  <!-- Content -->
+  <div class="hero-content">
+    <div class="hero-label">✦ গবেষণা-ভিত্তিক গাইডবুক</div>
+    <h1 class="hero-h1">ক্ষমতার <em>মহাকাব্য</em></h1>
+    <p class="hero-sub">
+      শূন্য থেকে শুরু করে যেকোনো সেক্টরে শীর্ষে পৌঁছানোর সম্পূর্ণ বিজ্ঞান ও কৌশল — <strong>দীর্ঘ গবেষণার ফসল।</strong>
+    </p>
+    <div class="hero-bullets">
+      <div class="hb"><div class="hb-icon">✓</div><span>১,৪৬৭ পৃষ্ঠার গভীর গবেষণা — বাস্তব জীবনে সরাসরি প্রয়োগযোগ্য মডিউল সহ</span></div>
+      <div class="hb"><div class="hb-icon">✓</div><span>১১৯টি অধ্যায়ে ধাপে ধাপে ক্ষমতার সিঁড়ি বেয়ে ওঠার সম্পূর্ণ রোডম্যাপ</span></div>
+      <div class="hb"><div class="hb-icon">✓</div><span>ক্ষমতা অর্জন থেকে অমরত্ব পর্যন্ত — ৫টি সম্পূর্ণ খণ্ড একসাথে</span></div>
+    </div>
+    <div class="hero-price">
+      <span class="hp-old">৳৫০০+</span>
+      <div class="hp-new">৳১৭৮</div>
+      <span class="hp-badge">৬৪% ছাড়</span>
+    </div>
+    <div class="mt12">
+      <button class="cta-btn" onclick="scrollToOrder()">📖 এখনই পড়তে চাই</button>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><span class="stat-n" id="sPages">০</span><div class="stat-l">পৃষ্ঠা</div></div>
+  <div class="stat"><span class="stat-n" id="sChaps">০</span><div class="stat-l">অধ্যায়</div></div>
+  <div class="stat"><span class="stat-n">৫</span><div class="stat-l">খণ্ড</div></div>
+  <div class="stat"><span class="stat-n">১০০%</span><div class="stat-l">প্রয়োগযোগ্য</div></div>
+</div>
+
+<!-- TEAM OLIVE -->
+<div class="olive-card">
+  <div class="olive-glow"></div>
+  <div class="olive-logo">
+    <div class="olive-emblem">🫒</div>
+    <div>
+      <div class="olive-brand-n">Team Olive</div>
+      <div class="olive-brand-s">Olive Research Institute • Bangladesh</div>
+    </div>
+  </div>
+  <p class="olive-text">
+    <strong>Team Olive</strong> হলো একটি স্বাধীন গবেষণা সত্তা, যারা দীর্ঘদিন ধরে ক্ষমতার কাঠামো, সমাজ-বিজ্ঞান এবং বাস্তব সাফল্যের প্যাটার্ন গভীরভাবে বিশ্লেষণ করে আসছে। <strong>"ক্ষমতার মহাকাব্য"</strong> তাদের বছরের পর বছরের গবেষণার সংকলন — এটি কোনো সাধারণ বই নয়, এটি একটি <strong>সম্পূর্ণ অ্যাকশন প্ল্যান</strong>।
+  </p>
+</div>
+
+<!-- VOLUMES -->
+<div class="card">
+  <div class="card-bar"></div>
+  <div class="card-body">
+    <div class="sec-label">বইয়ে কী পাবেন</div>
+    <div class="card-heading"><div class="ci">📚</div>৫টি খণ্ডে বিভক্ত সম্পূর্ণ জ্ঞানভাণ্ডার</div>
+
+    <div class="vol-item open">
+      <div class="vol-head" onclick="toggleVol(this)">
+        <div class="vol-n">১</div>
+        <div class="vol-info"><div class="vol-title">ক্ষমতার স্বরূপ ও ব্যাখ্যা</div><div class="vol-ch">৩০টি অধ্যায়</div></div>
+        <span class="vol-arr">▼</span>
+      </div>
+      <div class="vol-body"><div class="vol-content">এই খণ্ডে ক্ষমতার আসল মুখোশ উন্মোচন করা হয়েছে। ক্ষমতা আসলে কী এবং আমাদের সমাজে এটি পর্দার আড়াল থেকে কীভাবে কাজ করে — তা <strong>৩০টি বিস্তারিত অধ্যায়ে</strong> সহজভাবে ব্যাখ্যা করা হয়েছে। আপনি বুঝতে পারবেন কেন কিছু মানুষ সবসময় এগিয়ে থাকে।</div></div>
+    </div>
+
+    <div class="vol-item">
+      <div class="vol-head" onclick="toggleVol(this)">
+        <div class="vol-n">২</div>
+        <div class="vol-info"><div class="vol-title">ক্ষমতার সূচকসমূহ ও সম্পর্ক</div><div class="vol-ch">১২টি সূচক</div></div>
+        <span class="vol-arr">▼</span>
+      </div>
+      <div class="vol-body"><div class="vol-content">ক্ষমতা একা চলে না। <strong>১২টি প্রধান সূচক ও সম্পর্কের</strong> গূঢ় রহস্য এখানে দেওয়া হয়েছে। এই সম্পর্কগুলো নিয়ন্ত্রণ করে কীভাবে নিজের প্রভাব বহুগুণে বাড়ানো যায়, তা শিখবেন এখানে।</div></div>
+    </div>
+
+    <div class="vol-item">
+      <div class="vol-head" onclick="toggleVol(this)">
+        <div class="vol-n">৩</div>
+        <div class="vol-info"><div class="vol-title">ক্ষমতায় আরোহন</div><div class="vol-ch">১২টি ফান্ডামেন্টাল পলিসি</div></div>
+        <span class="vol-arr">▼</span>
+      </div>
+      <div class="vol-body"><div class="vol-content">শুরুটা একদম শূন্য থেকে হলেও কীভাবে ক্ষমতার শীর্ষে পৌঁছানো যায় — তার <strong>১২টি মৌলিক নীতি</strong> এখানে দেওয়া হয়েছে। এই নীতিগুলো আপনার আরোহনের সিঁড়ি হিসেবে কাজ করবে।</div></div>
+    </div>
+
+    <div class="vol-item">
+      <div class="vol-head" onclick="toggleVol(this)">
+        <div class="vol-n">৪</div>
+        <div class="vol-info"><div class="vol-title">আধিপত্যের ব্যাকরণ</div><div class="vol-ch">৩৫টি শক্তিশালী অস্ত্র</div></div>
+        <span class="vol-arr">▼</span>
+      </div>
+      <div class="vol-body"><div class="vol-content">ক্ষমতা পাওয়ার চেয়ে তা ধরে রাখা বেশি কঠিন। এই খণ্ডে রয়েছে <strong>৩৫টি শক্তিশালী কৌশল বা 'অস্ত্র'</strong>। মাঠপর্যায়ে নিজের আধিপত্য কীভাবে অটুট রাখবেন — এটি তারই সম্পূর্ণ গাইডবুক।</div></div>
+    </div>
+
+    <div class="vol-item">
+      <div class="vol-head" onclick="toggleVol(this)">
+        <div class="vol-n">৫</div>
+        <div class="vol-info"><div class="vol-title">প্রভাবের অমরত্ব</div><div class="vol-ch">৩০টি অধ্যায়</div></div>
+        <span class="vol-arr">▼</span>
+      </div>
+      <div class="vol-body"><div class="vol-content">ক্ষমতাকে চিরস্থায়ী করার কৌশল নিয়ে এই খণ্ড। <strong>৩০টি অধ্যায়ের</strong> মাধ্যমে শিখবেন কীভাবে নিজের অস্তিত্ব টিকিয়ে রেখে ইতিহাসে অমর হয়ে থাকতে হয়।</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- WHY -->
+<div class="why">
+  <div class="sec-label">কেন এই বই</div>
+  <div class="card-heading" style="margin-bottom:0"><div class="ci">🎯</div>আপনার জীবনের সেরা বিনিয়োগ</div>
+  <div class="why-grid">
+    <div class="why-item"><div class="wy-check">✓</div><div class="wy-text">শুধু থিওরি নয়, বাস্তব প্রয়োগের মডিউল সহ</div></div>
+    <div class="why-item"><div class="wy-check">✓</div><div class="wy-text">দীর্ঘ গবেষণা ও বাস্তব অভিজ্ঞতার সংমিশ্রণ</div></div>
+    <div class="why-item"><div class="wy-check">✓</div><div class="wy-text">যেকোনো সেক্টরে প্রযোজ্য কৌশল ও নীতি</div></div>
+    <div class="why-item"><div class="wy-check">✓</div><div class="wy-text">পড়েই জীবনে পরিবর্তন আনতে পারবেন</div></div>
+    <div class="why-item"><div class="wy-check">✓</div><div class="wy-text">১,৪৬৭ পৃষ্ঠার সম্পূর্ণ জ্ঞানভাণ্ডার</div></div>
+    <div class="why-item"><div class="wy-check">✓</div><div class="wy-text">একবার কিনলে সারাজীবনের রেফারেন্স</div></div>
+  </div>
+</div>
+
+<!-- PRICING -->
+<div class="pricing">
+  <div class="pricing-head">
+    <h3>🎁 বিশেষ অফার</h3>
+    <p>সম্পূর্ণ ৫ খণ্ড একসাথে — এখনই পান</p>
+  </div>
+  <div class="pricing-body">
+    <div class="price-row">
+      <div class="pr-was"><span>স্বাভাবিক মূল্য</span><strong>৳৫০০+</strong></div>
+      <div class="pr-arrow">→</div>
+      <div class="pr-now"><span>আজকের মূল্য</span><strong>৳১৭৮</strong></div>
+    </div>
+    <div class="includes">
+      <div class="inc-item"><div class="inc-check">✓</div> সম্পূর্ণ ৫ খণ্ড PDF (১,৪৬৭ পৃষ্ঠা)</div>
+      <div class="inc-item"><div class="inc-check">✓</div> তাৎক্ষণিক ডাউনলোড অ্যাক্সেস</div>
+      <div class="inc-item"><div class="inc-check">✓</div> যেকোনো ডিভাইসে পড়তে পারবেন</div>
+      <div class="inc-item"><div class="inc-check">✓</div> একবার কিনলে চিরকালের জন্য</div>
+    </div>
+    <button class="buy-btn" onclick="scrollToOrder()">📖 এখনই কিনুন — মাত্র ১৭৮ টাকা</button>
+  </div>
+</div>
+
+<!-- ORDER -->
+<div id="order-section">
+  <div class="order-head">
+    <h3>📦 অর্ডার করুন</h3>
+    <p>সহজ ৩ ধাপে আপনার ইবুক পেয়ে যান</p>
+  </div>
+  <div class="steps-tabs">
+    <div class="step-tab active" id="tab1">১. তথ্য</div>
+    <div class="step-tab" id="tab2">২. পেমেন্ট</div>
+    <div class="step-tab" id="tab3">৩. ভেরিফাই</div>
+  </div>
+  <div class="order-body">
+
+    <!-- Step 1 -->
+    <div class="step-panel active" id="step1">
+      <div class="fg">
+        <label class="fl" for="buyerName">আপনার নাম *</label>
+        <input class="fi" type="text" id="buyerName" placeholder="আপনার পুরো নাম লিখুন">
+      </div>
+      <div class="fg">
+        <label class="fl" for="buyerPhone">মোবাইল নম্বর *</label>
+        <input class="fi" type="tel" id="buyerPhone" placeholder="01XXXXXXXXX">
+      </div>
+      <button class="next-btn" onclick="goStep2()">পরবর্তী ধাপ → পেমেন্ট করুন</button>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step-panel" id="step2">
+      <div class="bkash-box">
+        <div class="bkash-logo">💳 bKash-এ পাঠান</div>
+        <!-- ⚠️ নিচের নম্বরটি আপনার bKash নম্বর দিয়ে পরিবর্তন করুন -->
+        <div class="bkash-num">01XXXXXXXXX</div>
+        <div class="bkash-amt">পাঠান মাত্র <strong>১৭৮ টাকা</strong></div>
+      </div>
+      <div class="bk-steps">
+        <div class="bk-s"><div class="bk-num">১</div><div class="bk-t">আপনার bKash অ্যাপ খুলুন → <strong>"Send Money"</strong> সিলেক্ট করুন</div></div>
+        <div class="bk-s"><div class="bk-num">২</div><div class="bk-t">নম্বর দিন: <strong>01XXXXXXXXX</strong> | Amount: <strong>১৭৮ টাকা</strong></div></div>
+        <div class="bk-s"><div class="bk-num">৩</div><div class="bk-t">Reference-এ আপনার ফোন নম্বরটি লিখুন</div></div>
+        <div class="bk-s"><div class="bk-num">৪</div><div class="bk-t">পেমেন্ট সফল হলে <strong>SMS-এর Transaction ID</strong> সংগ্রহ করুন</div></div>
+      </div>
+      <button class="bk-done-btn" onclick="goStep3()">✅ পেমেন্ট করেছি — পরবর্তী ধাপ</button>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step-panel" id="step3">
+      <div class="fg">
+        <label class="fl" for="txnId">bKash Transaction ID *</label>
+        <input class="fi" type="text" id="txnId" placeholder="যেমন: 8AB1C2D3EF">
+        <div class="fi-hint">পেমেন্টের পরে SMS-এ Transaction ID পাবেন</div>
+      </div>
+      <button class="verify-btn" id="verifyBtn" onclick="verifyPayment()">🔓 ভেরিফাই করুন ও PDF পান</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- PDF SECTION -->
+<div id="pdf-section">
+  <div class="pdf-head">
+    <div class="pdf-head-l">
+      <h3>📖 ক্ষমতার মহাকাব্য</h3>
+      <p>আপনার সম্পূর্ণ ইবুক রেডি</p>
+    </div>
+    <!-- ⚠️ href="ebook.pdf" — আপনার PDF-এর আসল URL দিন -->
+    <a href="ebook.pdf" download="ক্ষমতার-মহাকাব্য.pdf" class="pdf-dl-btn">⬇ ডাউনলোড করুন</a>
+  </div>
+  <div class="pdf-success">
+    <div class="pdf-ok-icon">✅</div>
+    <div class="pdf-ok-text">
+      <strong>পেমেন্ট যাচাই সফল!</strong>
+      আপনার ইবুক নিচে লোড হচ্ছে। ডাউনলোড করে রাখুন।
+    </div>
+  </div>
+  <div class="pdf-viewer-wrap">
+    <div class="pdf-spinner-box" id="pdfLoading">
+      <div class="pdf-spinner"></div>
+      <div>PDF লোড হচ্ছে...</div>
+    </div>
+    <!-- ⚠️ data-src="ebook.pdf" — আপনার PDF-এর আসল URL দিন -->
+    <iframe id="pdfFrame" class="pdf-iframe" data-src="ebook.pdf" style="display:none" onload="onPdfLoad()"></iframe>
+  </div>
+</div>
+
+</div><!-- .page -->
+
+<!-- STICKY BAR -->
+<div class="sticky-bar" id="stickyBar">
+  <div class="sb-l">
+    <div class="sb-text" id="sbText">🏆 ক্ষমতার শীর্ষে পৌঁছান</div>
+    <div class="sb-price">৳১৭৮</div>
+  </div>
+  <button class="sb-btn" onclick="scrollToOrder()">📖 এখনই কিনুন</button>
+</div>
+
+<!-- PREVIEW MODAL -->
+<div class="modal" id="previewModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h4>📄 Preview — ক্ষমতার মহাকাব্য</h4>
+      <button class="modal-close" onclick="closePreview()">✕</button>
+    </div>
+    <!-- ⚠️ src="preview.pdf" — আপনার preview PDF-এর URL দিন -->
+    <iframe src="preview.pdf" class="modal-frame"></iframe>
+  </div>
+</div>
+
+<script>
+/* ── CANVAS BACKGROUND ── */
+(function(){
+  const c=document.getElementById('bgCanvas');
+  const ctx=c.getContext('2d');
+  let W,H,pts=[];
+  function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}
+  function init(){
+    pts=[];
+    for(let i=0;i<30;i++){
+      pts.push({
+        x:Math.random()*W,y:Math.random()*H,
+        r:Math.random()*2.5+.8,
+        dx:(Math.random()-.5)*.35,
+        dy:-Math.random()*.55-.15,
+        op:Math.random()*.09+.03,
+        col:Math.random()>.5?'44,95,46':'201,149,42'
+      });
+    }
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    // subtle grid lines
+    ctx.strokeStyle='rgba(44,95,46,0.028)';
+    ctx.lineWidth=1;
+    for(let x=0;x<W;x+=80){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}
+    for(let y=0;y<H;y+=80){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
+    // particles
+    pts.forEach(p=>{
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(${p.col},${p.op})`;ctx.fill();
+      p.x+=p.dx;p.y+=p.dy;
+      if(p.y<-10){p.y=H+10;p.x=Math.random()*W}
+      if(p.x<-10)p.x=W+10;
+      if(p.x>W+10)p.x=-10;
+    });
+    requestAnimationFrame(draw);
+  }
+  resize();init();draw();
+  window.addEventListener('resize',()=>{resize();init()});
+})();
+
+/* ── COUNTERS ── */
+function bn(n){return String(n).split('').map(d=>'০১২৩৪৫৬৭৮৯'[+d]).join('')}
+function counter(el,target,dur=1800){
+  let st=null;
+  function step(ts){
+    if(!st)st=ts;
+    const p=Math.min((ts-st)/dur,1);
+    const e=1-Math.pow(1-p,3);
+    el.textContent=bn(Math.floor(e*target));
+    if(p<1)requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      counter(document.getElementById('sPages'),1467);
+      counter(document.getElementById('sChaps'),119,1400);
+      obs.disconnect();
+    }
+  });
+},{threshold:.5});
+const statsEl=document.querySelector('.stats');
+if(statsEl)obs.observe(statsEl);
+
+/* ── ACCORDION ── */
+function toggleVol(hd){
+  const item=hd.parentElement;
+  const open=item.classList.contains('open');
+  document.querySelectorAll('.vol-item.open').forEach(v=>v.classList.remove('open'));
+  if(!open)item.classList.add('open');
+}
+
+/* ── STICKY BAR ── */
+const texts=[
+  '🏆 ক্ষমতার শীর্ষে পৌঁছান','📚 ১,৪৬৭ পৃষ্ঠার জ্ঞান পান',
+  '🎯 আজই সিদ্ধান্ত নিন','✨ জীবন বদলে দিন',
+  '🚀 শূন্য থেকে শীর্ষে যান','💡 কৌশল শিখুন, এগিয়ে যান'
+];
+let ti=0;
+const sbEl=document.getElementById('sbText');
+function cycleTxt(){
+  sbEl.style.opacity='0';
+  setTimeout(()=>{sbEl.textContent=texts[ti%texts.length];sbEl.style.opacity='1';ti++;},280);
+}
+sbEl.style.transition='opacity .28s';
+setInterval(cycleTxt,3000);
+
+window.addEventListener('scroll',()=>{
+  const bar=document.getElementById('stickyBar');
+  const ord=document.getElementById('order-section');
+  const pdf=document.getElementById('pdf-section');
+  if(!bar)return;
+  const ordVisible=ord&&ord.getBoundingClientRect().top<window.innerHeight&&ord.getBoundingClientRect().bottom>0;
+  const pdfVisible=pdf&&pdf.style.display!=='none'&&pdf.getBoundingClientRect().top<window.innerHeight&&pdf.getBoundingClientRect().bottom>0;
+  bar.classList.toggle('show',window.scrollY>280&&!ordVisible&&!pdfVisible);
+});
+
+function scrollToOrder(){
+  const el=document.getElementById('order-section');
+  if(!el)return;
+  el.scrollIntoView({behavior:'smooth',block:'start'});
+  el.style.transition='box-shadow .3s';
+  el.style.boxShadow='0 0 0 3px rgba(44,95,46,.3)';
+  setTimeout(()=>el.style.boxShadow='',1600);
+}
+
+/* ── ORDER STEPS ── */
+function goStep2(){
+  const name=document.getElementById('buyerName').value.trim();
+  const phone=document.getElementById('buyerPhone').value.trim();
+  if(!name){alert('অনুগ্রহ করে আপনার নাম লিখুন।');return}
+  if(!phone||phone.length<11){alert('সঠিক মোবাইল নম্বর দিন (১১ সংখ্যা)।');return}
+  setStep(2);
+}
+function goStep3(){setStep(3)}
+function setStep(n){
+  for(let i=1;i<=3;i++){
+    document.getElementById('step'+i).classList.toggle('active',i===n);
+    const tab=document.getElementById('tab'+i);
+    tab.classList.remove('active','done');
+    if(i===n)tab.classList.add('active');
+    else if(i<n)tab.classList.add('done');
+  }
+}
+
+/* ── VERIFY ── */
+function verifyPayment(){
+  const txn=document.getElementById('txnId').value.trim();
+  if(!txn||txn.length<5){alert('সঠিক Transaction ID দিন।');return}
+  const btn=document.getElementById('verifyBtn');
+  btn.textContent='⏳ যাচাই হচ্ছে...';btn.disabled=true;
+  setTimeout(()=>{
+    document.getElementById('order-section').style.display='none';
+    const pdf=document.getElementById('pdf-section');
+    pdf.style.display='block';
+    pdf.scrollIntoView({behavior:'smooth',block:'start'});
+    // Load PDF
+    setTimeout(()=>{
+      const fr=document.getElementById('pdfFrame');
+      fr.src=fr.dataset.src;
+    },700);
+  },1600);
+}
+function onPdfLoad(){
+  document.getElementById('pdfLoading').style.display='none';
+  const fr=document.getElementById('pdfFrame');
+  fr.style.display='block';
+  fr.style.animation='pdfReveal .5s ease both';
+}
+
+/* ── PREVIEW MODAL ── */
+function openPreview(){document.getElementById('previewModal').classList.add('show');document.body.style.overflow='hidden'}
+function closePreview(){document.getElementById('previewModal').classList.remove('show');document.body.style.overflow=''}
+document.getElementById('previewModal').addEventListener('click',function(e){if(e.target===this)closePreview()});
+</script>
+</body>
+</html>
