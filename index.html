@@ -94,8 +94,8 @@ body{
 }
 @keyframes popBadge{0%,100%{transform:scale(1)}50%{transform:scale(1.09)}}
 .book-cover{
-  width:clamp(148px,40vw,195px);
-  height:clamp(210px,57vw,278px);
+  width:clamp(170px,46vw,220px);
+  height:clamp(240px,65vw,315px);
   background:linear-gradient(155deg,#162b08 0%,#1f380f 35%,#162b08 65%,#243515 100%);
   border-radius:3px 16px 16px 3px;
   box-shadow:8px 8px 0 rgba(0,0,0,.22),18px 18px 50px rgba(0,0,0,.3),0 0 80px rgba(44,95,46,.12);
@@ -189,13 +189,23 @@ body{
 @keyframes ctaPulse{0%,100%{box-shadow:0 6px 24px var(--olive-glow)}50%{box-shadow:0 8px 36px rgba(44,95,46,.45)}}
 @keyframes gradMove{to{background-position:200% center}}
 
-/* STATS */
+/* PRICE ROW fix for 3 items */
+.price-row{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+@media(max-width:380px){.price-row{gap:5px}}
+
+/* STATS GLOW */
 .stats{
   background:var(--white);border-radius:18px;
   padding:18px 12px;box-shadow:var(--shadow);
   margin-bottom:22px;
   display:grid;grid-template-columns:repeat(4,1fr);gap:6px;
-  border:1px solid rgba(44,95,46,.08);
+  border:2px solid rgba(44,95,46,.1);
+  position:relative;overflow:hidden;
+}
+.stats::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--olive-d),var(--olive-l),var(--gold),var(--olive-l),var(--olive-d));
+  background-size:300% 100%;animation:barShift 4s ease infinite;
 }
 @media(max-width:480px){.stats{grid-template-columns:repeat(2,1fr)}}
 .stat{text-align:center;padding:4px 0}
@@ -589,6 +599,61 @@ body{
 .mt12{margin-top:12px}
 .mt8{margin-top:8px}
 .t-center{text-align:center}
+
+/* HERO QUOTE */
+.hero-quote{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(13px,3.2vw,15px);font-style:italic;
+  color:var(--olive-d);font-weight:700;
+  border-left:3px solid var(--olive);padding-left:12px;
+  margin-bottom:16px;line-height:1.5;
+}
+
+/* PRICE MID */
+.pr-mid{
+  text-align:center;
+  background:linear-gradient(135deg,#f9f9f9,#f0f0f0);
+  border:1.5px solid rgba(0,0,0,.1);
+  border-radius:12px;padding:8px 16px;
+}
+.pr-mid span{display:block;font-size:10px;color:var(--ink-m);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:1px}
+.pr-mid strong{font-size:19px;color:var(--ink-m);text-decoration:line-through;font-weight:900}
+
+/* PAIN SECTION */
+.pain-section{
+  background:linear-gradient(150deg,#0f1f10 0%,#1a3020 40%,#0f1f10 100%);
+  border-radius:20px;padding:28px 22px;
+  margin-bottom:18px;position:relative;overflow:hidden;color:#fff;
+  border:1px solid rgba(201,149,42,.12);
+}
+.pain-section::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 2l2 9h9l-7 5 3 9-7-5-7 5 3-9-7-5h9z' fill='%23c9952a' fill-opacity='0.04'/%3E%3C/svg%3E");
+  z-index:0;
+}
+.pain-glow-l{position:absolute;width:200px;height:200px;background:radial-gradient(circle,rgba(201,149,42,.08),transparent 70%);border-radius:50%;left:-50px;top:20px;z-index:0}
+.pain-glow-r{position:absolute;width:160px;height:160px;background:radial-gradient(circle,rgba(44,95,46,.1),transparent 70%);border-radius:50%;right:-30px;bottom:20px;z-index:0}
+.pain-header{position:relative;z-index:1;text-align:center;margin-bottom:20px}
+.pain-eyebrow{display:inline-block;font-size:10px;font-weight:800;letter-spacing:2.5px;color:var(--gold-l);text-transform:uppercase;border:1px solid rgba(201,149,42,.3);border-radius:50px;padding:4px 14px;margin-bottom:12px}
+.pain-title{font-family:'Playfair Display',serif;font-size:clamp(17px,5vw,23px);font-weight:900;color:#fff;line-height:1.3;margin-bottom:8px}
+.pain-title em{color:var(--gold-l);font-style:normal}
+.pain-open{font-size:13px;color:rgba(255,255,255,.72);line-height:1.78}
+.pain-open strong{color:#fff}
+.pain-situations{display:flex;flex-direction:column;gap:10px;margin:16px 0;position:relative;z-index:1}
+.pain-sit{display:flex;gap:11px;align-items:flex-start;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-left:3px solid rgba(201,149,42,.5);border-radius:10px;padding:12px 14px}
+.pain-sit-ico{font-size:16px;flex-shrink:0;margin-top:1px}
+.pain-sit-t{font-size:12.5px;color:rgba(255,255,255,.82);line-height:1.7}
+.pain-sit-t strong{color:#e8d5a0}
+.pain-truth{background:rgba(201,149,42,.07);border:1.5px solid rgba(201,149,42,.22);border-radius:12px;padding:15px 17px;margin:16px 0;position:relative;z-index:1}
+.pain-truth-t{font-size:13px;line-height:1.8;color:rgba(255,255,255,.85)}
+.pain-truth-t strong{color:var(--gold-l)}
+.pain-signal{background:rgba(44,95,46,.1);border:1.5px solid rgba(44,95,46,.25);border-radius:12px;padding:15px 17px;margin:14px 0;position:relative;z-index:1}
+.pain-signal-t{font-size:13px;line-height:1.8;color:rgba(255,255,255,.85)}
+.pain-signal-t strong{color:#86efac}
+.pain-cta-wrap{position:relative;z-index:1;text-align:center;margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.08)}
+.pain-cta-q{font-family:'Playfair Display',serif;font-size:clamp(15px,4vw,19px);font-weight:900;color:var(--gold-l);margin-bottom:5px;line-height:1.3}
+.pain-cta-sub{font-size:12px;color:rgba(255,255,255,.55);margin-bottom:14px}
+.pain-cta-btn{display:inline-flex;align-items:center;gap:9px;background:linear-gradient(135deg,var(--olive-d),var(--olive),var(--olive-l));background-size:200% auto;color:#fff;border:none;border-radius:14px;padding:14px 30px;font-family:'Noto Sans Bengali',sans-serif;font-size:15px;font-weight:800;cursor:pointer;box-shadow:0 6px 24px var(--olive-glow);animation:ctaPulse 2.5s ease-in-out infinite,gradMove 4s linear infinite;letter-spacing:.3px}
 </style>
 </head>
 <body>
@@ -634,17 +699,22 @@ body{
     <div class="hero-label">✦ গবেষণা-ভিত্তিক গাইডবুক</div>
     <h1 class="hero-h1">ক্ষমতার <em>মহাকাব্য</em></h1>
     <p class="hero-sub">
-      শূন্য থেকে শুরু করে যেকোনো সেক্টরে শীর্ষে পৌঁছানোর সম্পূর্ণ বিজ্ঞান ও কৌশল — <strong>দীর্ঘ গবেষণার ফসল।</strong>
+      ক্ষমতা আসলে কী? এটি কীভাবে কাজ করে? শূন্য থেকে প্রভাব-প্রতিপত্তি অর্জন এবং তা সারাজীবন ধরে রাখার গূঢ় রহস্য নিয়ে এই দীর্ঘ গবেষণার মহাকাব্য।<br>
+      সমাজ থেকে রাষ্ট্র—প্রতিটি সেক্টরে নিজের কর্তৃত্ব স্থাপন, আধিপত্য বিস্তার এবং তা চিরস্থায়ী করার মনস্তাত্ত্বিক ও কৌশলগত ডকট্রিন।
     </p>
+    <div class="hero-quote">"ক্ষমতা উপহার নয়, এটি অর্জনের বিজ্ঞান।"</div>
     <div class="hero-bullets">
-      <div class="hb"><div class="hb-icon">✓</div><span>১,৪৬৭ পৃষ্ঠার গভীর গবেষণা — বাস্তব জীবনে সরাসরি প্রয়োগযোগ্য মডিউল সহ</span></div>
+      <div class="hb"><div class="hb-icon">✓</div><span>১,২৫০ পৃষ্ঠার গভীর গবেষণা — বাস্তব জীবনে সরাসরি প্রয়োগযোগ্য মডিউল সহ</span></div>
       <div class="hb"><div class="hb-icon">✓</div><span>১১৯টি অধ্যায়ে ধাপে ধাপে ক্ষমতার সিঁড়ি বেয়ে ওঠার সম্পূর্ণ রোডম্যাপ</span></div>
       <div class="hb"><div class="hb-icon">✓</div><span>ক্ষমতা অর্জন থেকে অমরত্ব পর্যন্ত — ৫টি সম্পূর্ণ খণ্ড একসাথে</span></div>
     </div>
     <div class="hero-price">
-      <span class="hp-old">৳৫০০+</span>
+      <div style="text-align:center"><div style="font-size:9.5px;color:var(--ink-l);font-weight:700;text-transform:uppercase">ফিজিক্যাল</div><span class="hp-old">৳১,৪০০</span></div>
+      <div style="font-size:18px;color:var(--ink-l)">→</div>
+      <div style="text-align:center"><div style="font-size:9.5px;color:var(--ink-m);font-weight:700;text-transform:uppercase">ইবুক</div><span style="font-size:17px;font-weight:800;color:var(--ink-m);text-decoration:line-through">৳২০০</span></div>
+      <div style="font-size:18px;color:var(--ink-l)">→</div>
       <div class="hp-new">৳১৭৮</div>
-      <span class="hp-badge">৬৪% ছাড়</span>
+      <span class="hp-badge">আপনার জন্য!</span>
     </div>
     <div class="mt12">
       <button class="cta-btn" onclick="scrollToOrder()">📖 এখনই পড়তে চাই</button>
@@ -656,6 +726,7 @@ body{
 <div class="stats">
   <div class="stat"><span class="stat-n" id="sPages">০</span><div class="stat-l">পৃষ্ঠা</div></div>
   <div class="stat"><span class="stat-n" id="sChaps">০</span><div class="stat-l">অধ্যায়</div></div>
+
   <div class="stat"><span class="stat-n">৫</span><div class="stat-l">খণ্ড</div></div>
   <div class="stat"><span class="stat-n">১০০%</span><div class="stat-l">প্রয়োগযোগ্য</div></div>
 </div>
@@ -729,6 +800,44 @@ body{
   </div>
 </div>
 
+<!-- PAIN/WHY NECESSARY SECTION -->
+<div class="pain-section">
+  <div class="pain-glow-l"></div>
+  <div class="pain-glow-r"></div>
+  <div class="pain-header">
+    <div class="pain-eyebrow">📢 এটা কি আপনার জন্য?</div>
+    <div class="pain-title">কেন এই বইটি<br><em>সবার জন্য আবশ্যক!</em></div>
+    <p class="pain-open"><strong>আপনি কি জন্মই নিয়েছেন মাথা নত করে বেঁচে থাকার জন্য?</strong><br>
+    আপনার কি এমন কোনো মুহূর্ত গেছে, যখন নিজেকে চরম ক্ষমতাশূন্য মনে হয়েছে?</p>
+    <p class="pain-open" style="margin-top:8px">কল্পনা করুন সেই দিনগুলোর কথা...</p>
+  </div>
+  <div class="pain-situations">
+    <div class="pain-sit">
+      <span class="pain-sit-ico">😤</span>
+      <div class="pain-sit-t">কোনো তথাকথিত ক্ষমতাধর কারো সামনে আপনাকে <strong>অসহায় লেগেছে</strong> অথবা মুখ বুজে অপমান সহ্য করতে হয়েছে</div>
+    </div>
+    <div class="pain-sit">
+      <span class="pain-sit-ico">⚖️</span>
+      <div class="pain-sit-t">পারিবারিক বা জমিজমা সংক্রান্ত বিরোধে আপনি <strong>সঠিক ছিলেন</strong>, কিন্তু কেবল 'প্রভাব' নেই বলে আপনাকে কোণঠাসা হতে হয়েছে</div>
+    </div>
+    <div class="pain-sit">
+      <span class="pain-sit-ico">🔥</span>
+      <div class="pain-sit-t">ক্ষমতার অভাবে কেউ আপনাকে তুচ্ছতাচ্ছিল্য করেছে — অথচ আপনি জানতেন, <strong>আপনার হাতে ক্ষমতা থাকলে তারা চোখের দিকে তাকানোর সাহসও পেত না</strong></div>
+    </div>
+  </div>
+  <div class="pain-truth">
+    <p class="pain-truth-t">এটাই আমাদের সমাজের নগ্ন সত্য: <strong>পৃথিবী কেবল শক্তিমানকে ভয় পায় এবং তাদেরই কুর্নিশ করে।</strong> দয়া বা করুণা দিয়ে এ পৃথিবীতে নিজের অধিকার আদায় করা যায় না।</p>
+  </div>
+  <div class="pain-signal">
+    <p class="pain-signal-t">আপনার সেই হতাশাজনক মুহূর্তগুলো আসলে আপনার দুর্বলতা নয় — সেগুলো ছিল <strong>নিজেকে আমূল বদলে ফেলার সংকেত।</strong> মনে রাখবেন, ক্ষমতা কেউ আপনাকে থালায় সাজিয়ে উপহার দেবে না; ক্ষমতা <strong>কেড়ে নিতে হয়, অর্জন করে নিতে হয়।</strong></p>
+  </div>
+  <div class="pain-cta-wrap">
+    <div class="pain-cta-q">আর কতকাল অপদস্থ হবেন?</div>
+    <p class="pain-cta-sub">নিজেকে এমনভাবে গড়ে তুলুন যেন আপনার উপস্থিতিই অন্যদের জন্য একটি বার্তা হয়ে দাঁড়ায়। দাবার ঘুঁটি হওয়া বন্ধ করুন — এবার সময় <strong style="color:var(--gold-l)">নিয়ন্ত্রক</strong> হওয়ার।</p>
+    <button class="pain-cta-btn" onclick="scrollToOrder()">📖 এখনই পড়তে চাই — মাত্র ১৭৮ টাকা</button>
+  </div>
+</div>
+
 <!-- WHY -->
 <div class="why">
   <div class="sec-label">কেন এই বই</div>
@@ -738,7 +847,7 @@ body{
     <div class="why-item"><div class="wy-check">✓</div><div class="wy-text">দীর্ঘ গবেষণা ও বাস্তব অভিজ্ঞতার সংমিশ্রণ</div></div>
     <div class="why-item"><div class="wy-check">✓</div><div class="wy-text">যেকোনো সেক্টরে প্রযোজ্য কৌশল ও নীতি</div></div>
     <div class="why-item"><div class="wy-check">✓</div><div class="wy-text">পড়েই জীবনে পরিবর্তন আনতে পারবেন</div></div>
-    <div class="why-item"><div class="wy-check">✓</div><div class="wy-text">১,৪৬৭ পৃষ্ঠার সম্পূর্ণ জ্ঞানভাণ্ডার</div></div>
+    <div class="why-item"><div class="wy-check">✓</div><div class="wy-text">১,২৫০ পৃষ্ঠার সম্পূর্ণ জ্ঞানভাণ্ডার</div></div>
     <div class="why-item"><div class="wy-check">✓</div><div class="wy-text">একবার কিনলে সারাজীবনের রেফারেন্স</div></div>
   </div>
 </div>
@@ -746,17 +855,19 @@ body{
 <!-- PRICING -->
 <div class="pricing">
   <div class="pricing-head">
-    <h3>🎁 বিশেষ অফার</h3>
-    <p>সম্পূর্ণ ৫ খণ্ড একসাথে — এখনই পান</p>
+    <h3>🎁 এক্সক্লুসিভ অফার</h3>
+    <p>ফিজিক্যাল কপি ৳১,৪০০ • ইবুক ৳২০০ → <strong style="color:var(--gold-l)">আপনার জন্য মাত্র ১৭৮ টাকা!</strong></p>
   </div>
   <div class="pricing-body">
     <div class="price-row">
-      <div class="pr-was"><span>স্বাভাবিক মূল্য</span><strong>৳৫০০+</strong></div>
+      <div class="pr-was"><span>ফিজিক্যাল কপি</span><strong>৳১,৪০০</strong></div>
       <div class="pr-arrow">→</div>
-      <div class="pr-now"><span>আজকের মূল্য</span><strong>৳১৭৮</strong></div>
+      <div class="pr-mid"><span>ইবুক মূল্য</span><strong>৳২০০</strong></div>
+      <div class="pr-arrow">→</div>
+      <div class="pr-now"><span>🔥 আপনার জন্য</span><strong>৳১৭৮</strong></div>
     </div>
     <div class="includes">
-      <div class="inc-item"><div class="inc-check">✓</div> সম্পূর্ণ ৫ খণ্ড PDF (১,৪৬৭ পৃষ্ঠা)</div>
+      <div class="inc-item"><div class="inc-check">✓</div> সম্পূর্ণ ৫ খণ্ড PDF (১,২৫০ পৃষ্ঠা)</div>
       <div class="inc-item"><div class="inc-check">✓</div> তাৎক্ষণিক ডাউনলোড অ্যাক্সেস</div>
       <div class="inc-item"><div class="inc-check">✓</div> যেকোনো ডিভাইসে পড়তে পারবেন</div>
       <div class="inc-item"><div class="inc-check">✓</div> একবার কিনলে চিরকালের জন্য</div>
@@ -929,7 +1040,7 @@ function counter(el,target,dur=1800){
 const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
-      counter(document.getElementById('sPages'),1467);
+      counter(document.getElementById('sPages'),1250);
       counter(document.getElementById('sChaps'),119,1400);
       obs.disconnect();
     }
