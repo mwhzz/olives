@@ -654,6 +654,333 @@ body{
 .pain-cta-q{font-family:'Playfair Display',serif;font-size:clamp(15px,4vw,19px);font-weight:900;color:var(--gold-l);margin-bottom:5px;line-height:1.3}
 .pain-cta-sub{font-size:12px;color:rgba(255,255,255,.55);margin-bottom:14px}
 .pain-cta-btn{display:inline-flex;align-items:center;gap:9px;background:linear-gradient(135deg,var(--olive-d),var(--olive),var(--olive-l));background-size:200% auto;color:#fff;border:none;border-radius:14px;padding:14px 30px;font-family:'Noto Sans Bengali',sans-serif;font-size:15px;font-weight:800;cursor:pointer;box-shadow:0 6px 24px var(--olive-glow);animation:ctaPulse 2.5s ease-in-out infinite,gradMove 4s linear infinite;letter-spacing:.3px}
+
+/* ═══ POWER QUOTE BLOCK ═══ */
+.power-quote-block{
+  position:relative;overflow:hidden;
+  background:linear-gradient(145deg,#1a3d1c 0%,#0f2010 40%,#162b10 70%,#1a3d1c 100%);
+  border-radius:20px;padding:32px 24px 28px;
+  margin-bottom:18px;text-align:center;
+  border:1px solid rgba(201,149,42,.22);
+  box-shadow:0 8px 40px rgba(0,0,0,.18),0 0 0 1px rgba(201,149,42,.08);
+  animation:quoteGlow 4s ease-in-out infinite alternate;
+}
+@keyframes quoteGlow{
+  from{box-shadow:0 8px 40px rgba(0,0,0,.18),0 0 24px rgba(201,149,42,.06)}
+  to{box-shadow:0 12px 50px rgba(0,0,0,.22),0 0 40px rgba(201,149,42,.13)}
+}
+.pq-glow{
+  position:absolute;width:300px;height:300px;
+  background:radial-gradient(circle,rgba(201,149,42,.12),transparent 65%);
+  border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+.pq-crown{
+  font-size:clamp(28px,7vw,38px);
+  display:block;margin-bottom:10px;
+  filter:drop-shadow(0 0 14px rgba(201,149,42,.6));
+  animation:crownFloat 3s ease-in-out infinite;
+}
+@keyframes crownFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.pq-lines-top,.pq-lines-bot{
+  display:flex;align-items:center;justify-content:center;gap:5px;
+  margin:10px auto;width:100%;
+}
+.pq-lines-top span,.pq-lines-bot span{
+  display:block;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(201,149,42,.55),transparent);
+}
+.pq-lines-top span:nth-child(1),.pq-lines-bot span:nth-child(1){width:clamp(30px,8vw,60px)}
+.pq-lines-top span:nth-child(2),.pq-lines-bot span:nth-child(2){width:clamp(50px,15vw,120px)}
+.pq-lines-top span:nth-child(3),.pq-lines-bot span:nth-child(3){width:clamp(30px,8vw,60px)}
+.pq-text{
+  font-family:'Noto Sans Bengali',sans-serif;
+  font-size:clamp(13px,3.5vw,15.5px);
+  color:rgba(255,255,255,.7);
+  line-height:1.85;font-style:normal;
+  position:relative;z-index:1;
+  margin:0 0 4px;padding:0 4px;
+}
+.pq-highlight{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(14.5px,4vw,17.5px);
+  font-weight:700;font-style:italic;
+  color:var(--gold-l);
+  display:inline-block;
+  text-shadow:0 0 20px rgba(201,149,42,.35);
+  line-height:1.6;
+  background:linear-gradient(135deg,#e5b84d,#c9952a,#f0ca6a,#c9952a);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;background-size:200% auto;
+  animation:goldShine 3s ease infinite;
+}
+@keyframes goldShine{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.pq-author{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(201,149,42,.1);
+  border:1px solid rgba(201,149,42,.25);
+  border-radius:50px;padding:6px 16px;
+  position:relative;z-index:1;margin-top:4px;
+}
+.pq-author-dot{font-size:15px}
+.pq-author-name{
+  font-family:'Cinzel',serif;font-size:11px;
+  letter-spacing:2.5px;color:var(--gold-l);
+  text-transform:uppercase;font-weight:700;
+}
+
+/* ═══ ENHANCED PRICING V2 ═══ */
+.pricing-v2{
+  background:var(--white);border-radius:24px;
+  border:none;overflow:hidden;margin-bottom:18px;
+  box-shadow:0 16px 60px rgba(0,0,0,.14),0 0 0 2px rgba(220,38,38,.12);
+  position:relative;
+}
+.pricing-v2-topbar{
+  background:linear-gradient(90deg,#7f1d1d,var(--red),#f05252,var(--red),#7f1d1d);
+  background-size:300% auto;animation:gradSlide 4s linear infinite;
+  padding:9px 16px;display:flex;align-items:center;justify-content:center;gap:12px;
+  flex-wrap:wrap;
+}
+.ptb-tag{
+  color:#fff;font-size:11px;font-weight:800;
+  letter-spacing:.5px;text-transform:uppercase;
+}
+.ptb-save{
+  background:#fff;color:var(--red);
+  font-size:11px;font-weight:900;
+  border-radius:50px;padding:2px 10px;
+  letter-spacing:.3px;
+}
+.pricing-v2 .pricing-head{
+  background:linear-gradient(145deg,#0f2010,#1a3d1c,#1f4a22);
+  padding:28px 22px 24px;color:#fff;text-align:center;
+  position:relative;overflow:hidden;
+}
+.pricing-v2 .pricing-head::after{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1' fill='%23c9952a' fill-opacity='0.08'/%3E%3C/svg%3E");
+  pointer-events:none;
+}
+.ph-icon{
+  font-size:36px;display:block;margin-bottom:8px;
+  filter:drop-shadow(0 0 12px rgba(201,149,42,.5));
+}
+.pricing-v2 .pricing-head h3{
+  font-family:'Playfair Display',serif;font-size:clamp(20px,5vw,26px);
+  font-weight:900;margin-bottom:5px;
+}
+.pricing-v2 .pricing-head p{font-size:13px;opacity:.75}
+
+/* Price compare cards */
+.pricing-compare{
+  display:flex;align-items:center;justify-content:center;
+  gap:0;padding:24px 16px 8px;
+  flex-wrap:wrap;background:linear-gradient(180deg,rgba(26,61,28,.04),transparent);
+}
+.pc-card{
+  border-radius:16px;padding:14px 16px;text-align:center;
+  min-width:clamp(85px,22vw,110px);position:relative;
+  flex-shrink:0;
+}
+.pc-old,.pc-mid{
+  background:linear-gradient(145deg,#f7f7f7,#efefef);
+  border:1.5px solid rgba(0,0,0,.09);
+  opacity:.72;
+}
+.pc-slash{
+  position:absolute;top:0;left:0;right:0;bottom:0;
+  border-radius:16px;overflow:hidden;pointer-events:none;
+}
+.pc-slash::after{
+  content:'';position:absolute;
+  top:0;left:0;right:0;bottom:0;
+  background:linear-gradient(135deg,transparent 45%,rgba(220,38,38,.18) 45%,rgba(220,38,38,.18) 55%,transparent 55%);
+}
+.pc-label{font-size:9.5px;font-weight:700;color:var(--ink-m);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.pc-price{font-family:'Playfair Display',serif;font-size:clamp(17px,4.5vw,22px);font-weight:900;color:var(--ink-m);text-decoration:line-through;text-decoration-color:rgba(220,38,38,.55)}
+.pc-hero{
+  background:linear-gradient(145deg,#fff0f0,#ffe4e4,#fff8f8);
+  border:2.5px solid var(--red);
+  box-shadow:0 8px 30px rgba(220,38,38,.22),0 0 0 4px rgba(220,38,38,.06);
+  padding:18px 20px;
+  transform:scale(1.05);
+  animation:heroPricePulse 2.5s ease-in-out infinite;
+}
+@keyframes heroPricePulse{
+  0%,100%{box-shadow:0 8px 30px rgba(220,38,38,.22),0 0 0 4px rgba(220,38,38,.06)}
+  50%{box-shadow:0 12px 40px rgba(220,38,38,.32),0 0 0 6px rgba(220,38,38,.1)}
+}
+.pc-fire{font-size:20px;display:block;margin-bottom:3px}
+.pc-label-hero{font-size:10px;font-weight:800;color:var(--red);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.pc-price-hero{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(26px,7vw,36px);font-weight:900;color:var(--red);line-height:1;
+}
+.pc-only-tag{
+  font-size:9px;font-weight:800;color:var(--red);
+  background:rgba(220,38,38,.08);border-radius:50px;
+  padding:2px 8px;margin-top:5px;display:inline-block;
+  letter-spacing:.3px;
+}
+.pc-arrow-wrap{
+  display:flex;flex-direction:column;align-items:center;
+  padding:0 4px;color:var(--ink-l);flex-shrink:0;
+}
+.pc-arrow-line{width:1px;height:20px;background:linear-gradient(to bottom,transparent,var(--ink-l),transparent)}
+.pc-arrow-down{font-size:10px;margin-top:2px;color:var(--ink-l)}
+@media(max-width:380px){
+  .pricing-compare{gap:4px}
+  .pc-card{min-width:72px;padding:10px 8px}
+  .pc-hero{padding:14px 12px}
+}
+
+/* Includes V2 */
+.pi-title{
+  font-size:12px;font-weight:800;color:var(--ink-s);
+  text-transform:uppercase;letter-spacing:1px;
+  margin-bottom:12px;margin-top:4px;
+}
+.includes-v2 .inc-item{
+  background:linear-gradient(135deg,rgba(44,95,46,.04),rgba(44,95,46,.02));
+  border:1px solid rgba(44,95,46,.1);
+  border-radius:10px;padding:10px 13px;
+  display:flex;align-items:center;gap:10px;
+  font-size:13px;color:var(--ink-s);
+}
+.inc-txt{font-size:13px;color:var(--ink-s)}
+.inc-txt strong{color:var(--ink)}
+
+/* CTA badge */
+.pricing-cta-badge{
+  display:flex;align-items:center;justify-content:space-between;
+  background:linear-gradient(135deg,#fff5f5,#ffe8e8,#fff5f5);
+  border:2px solid rgba(220,38,38,.2);
+  border-radius:16px;padding:14px 20px;
+  margin:18px 0 16px;
+  box-shadow:0 4px 16px rgba(220,38,38,.1);
+}
+.pcb-was{font-size:11px;color:var(--ink-m);font-weight:600;margin-bottom:3px}
+.pcb-was s{color:var(--ink-l)}
+.pcb-now{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(24px,6vw,32px);font-weight:900;color:var(--red);line-height:1;
+}
+.pcb-now span{font-size:clamp(30px,8vw,42px)}
+.pcb-off{
+  background:linear-gradient(135deg,var(--red),#f05252);
+  color:#fff;border-radius:12px;
+  padding:10px 14px;text-align:center;
+  font-size:clamp(18px,5vw,22px);font-weight:900;line-height:1;
+  box-shadow:0 4px 14px rgba(220,38,38,.3);
+}
+.pcb-off small{font-size:11px;font-weight:700;opacity:.9;display:block;margin-top:2px}
+.buy-btn-v2{
+  width:100%;padding:18px;
+  background:linear-gradient(135deg,var(--olive-d),var(--olive),var(--olive-l));
+  background-size:200% auto;
+  color:#fff;border:none;border-radius:14px;
+  font-family:'Noto Sans Bengali',sans-serif;
+  font-size:clamp(15px,4vw,17px);font-weight:800;cursor:pointer;
+  box-shadow:0 8px 28px var(--olive-glow);
+  animation:ctaPulse 2.5s ease-in-out infinite,gradMove 4s linear infinite;
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  letter-spacing:.3px;
+}
+.pricing-trust{
+  text-align:center;font-size:11px;color:var(--ink-m);
+  margin-top:12px;font-weight:600;line-height:1.8;
+}
+
+/* ═══ HERO PRICE BOX ═══ */
+.hero-price-box{
+  background:linear-gradient(145deg,#fff,#fff8f8,#fff);
+  border:2px solid rgba(220,38,38,.2);
+  border-radius:18px;
+  padding:14px 16px 12px;
+  margin-bottom:18px;
+  box-shadow:0 6px 28px rgba(220,38,38,.1),0 0 0 4px rgba(220,38,38,.04);
+  position:relative;overflow:hidden;
+  animation:hpbGlow 3s ease-in-out infinite alternate;
+}
+@keyframes hpbGlow{
+  from{box-shadow:0 6px 28px rgba(220,38,38,.1),0 0 0 4px rgba(220,38,38,.04)}
+  to{box-shadow:0 10px 36px rgba(220,38,38,.18),0 0 0 5px rgba(220,38,38,.08)}
+}
+.hero-price-box::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2.5px;
+  background:linear-gradient(90deg,transparent,var(--red),#f87171,var(--red),transparent);
+  background-size:200% auto;animation:gradSlide 3s linear infinite;
+}
+.hpb-tag{
+  display:inline-block;
+  background:linear-gradient(135deg,var(--red),#f05252);
+  color:#fff;font-size:10px;font-weight:800;
+  border-radius:50px;padding:3px 11px;
+  margin-bottom:10px;letter-spacing:.3px;
+  box-shadow:0 3px 10px rgba(220,38,38,.3);
+}
+.hpb-strike-row{
+  display:flex;align-items:center;justify-content:center;
+  gap:6px;flex-wrap:nowrap;
+}
+.hpb-item{text-align:center;flex-shrink:0}
+.hpb-lbl{
+  font-size:9px;font-weight:700;color:var(--ink-l);
+  text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px;
+}
+.hpb-val{font-weight:900;line-height:1}
+.hpb-cross{
+  font-size:clamp(14px,3.5vw,17px);
+  color:var(--ink-l);text-decoration:line-through;
+  text-decoration-color:rgba(220,38,38,.5);
+}
+.hpb-cross2{
+  font-size:clamp(14px,3.5vw,17px);
+  color:var(--ink-m);text-decoration:line-through;
+  text-decoration-color:rgba(220,38,38,.5);
+}
+.hpb-div{
+  font-size:14px;color:var(--ink-l);
+  margin-top:8px;flex-shrink:0;
+}
+.hpb-winner{
+  background:linear-gradient(145deg,#fff0f0,#ffe4e4);
+  border:2px solid rgba(220,38,38,.25);
+  border-radius:12px;padding:8px 14px;
+  box-shadow:0 4px 16px rgba(220,38,38,.15);
+}
+.hpb-lbl-w{
+  font-size:9px;font-weight:800;color:var(--red);
+  text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px;
+}
+.hpb-big{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(26px,7vw,34px);
+  font-weight:900;color:var(--red);line-height:1;
+}
+.hpb-saving{
+  display:flex;align-items:center;justify-content:center;
+  gap:7px;margin-top:10px;flex-wrap:wrap;
+}
+.hpb-save-pill{
+  background:linear-gradient(135deg,rgba(22,163,74,.1),rgba(22,163,74,.06));
+  border:1px solid rgba(22,163,74,.25);
+  color:#15803d;font-size:10.5px;font-weight:800;
+  border-radius:50px;padding:4px 12px;
+}
+.hpb-off-pill{
+  background:linear-gradient(135deg,var(--red),#ef4444);
+  color:#fff;font-size:10px;font-weight:900;
+  border-radius:50px;padding:4px 10px;
+  box-shadow:0 2px 8px rgba(220,38,38,.3);
+  letter-spacing:.3px;
+}
+@media(max-width:360px){
+  .hpb-strike-row{gap:4px}
+  .hpb-winner{padding:6px 10px}
+  .hpb-big{font-size:22px}
+}
 </style>
 </head>
 <body>
@@ -708,16 +1035,32 @@ body{
       <div class="hb"><div class="hb-icon">✓</div><span>১১৯টি অধ্যায়ে ধাপে ধাপে ক্ষমতার সিঁড়ি বেয়ে ওঠার সম্পূর্ণ রোডম্যাপ</span></div>
       <div class="hb"><div class="hb-icon">✓</div><span>ক্ষমতা অর্জন থেকে অমরত্ব পর্যন্ত — ৫টি সম্পূর্ণ খণ্ড একসাথে</span></div>
     </div>
-    <div class="hero-price">
-      <div style="text-align:center"><div style="font-size:9.5px;color:var(--ink-l);font-weight:700;text-transform:uppercase">ফিজিক্যাল</div><span class="hp-old">৳১,৪০০</span></div>
-      <div style="font-size:18px;color:var(--ink-l)">→</div>
-      <div style="text-align:center"><div style="font-size:9.5px;color:var(--ink-m);font-weight:700;text-transform:uppercase">ইবুক</div><span style="font-size:17px;font-weight:800;color:var(--ink-m);text-decoration:line-through">৳২০০</span></div>
-      <div style="font-size:18px;color:var(--ink-l)">→</div>
-      <div class="hp-new">৳১৭৮</div>
-      <span class="hp-badge">আপনার জন্য!</span>
+    <!-- HERO PRICE BOX -->
+    <div class="hero-price-box">
+      <div class="hpb-tag">🔥 সীমিত সময়ের অফার</div>
+      <div class="hpb-strike-row">
+        <div class="hpb-item">
+          <div class="hpb-lbl">ফিজিক্যাল কপি</div>
+          <div class="hpb-val hpb-cross">৳১,৪০০</div>
+        </div>
+        <div class="hpb-div">›</div>
+        <div class="hpb-item">
+          <div class="hpb-lbl">ইবুক</div>
+          <div class="hpb-val hpb-cross2">৳২০০</div>
+        </div>
+        <div class="hpb-div">›</div>
+        <div class="hpb-item hpb-winner">
+          <div class="hpb-lbl-w">PDF — আজকের দাম</div>
+          <div class="hpb-big">৳১৭৮</div>
+        </div>
+      </div>
+      <div class="hpb-saving">
+        <span class="hpb-save-pill">💰 ৳১,২২২ সাশ্রয় হচ্ছে আপনার!</span>
+        <span class="hpb-off-pill">৮৭% ছাড়</span>
+      </div>
     </div>
     <div class="mt12">
-      <button class="cta-btn" onclick="scrollToOrder()">📖 এখনই পড়তে চাই</button>
+      <button class="cta-btn" onclick="scrollToOrder()">📖 এখনই পড়তে চাই — মাত্র ১৭৮৳</button>
     </div>
   </div>
 </section>
@@ -742,7 +1085,7 @@ body{
     </div>
   </div>
   <p class="olive-text">
-    <strong>Team Olive</strong> হলো একটি স্বাধীন গবেষণা সত্তা, যারা দীর্ঘদিন ধরে ক্ষমতার কাঠামো, সমাজ-বিজ্ঞান এবং বাস্তব সাফল্যের প্যাটার্ন গভীরভাবে বিশ্লেষণ করে আসছে। <strong>"ক্ষমতার মহাকাব্য"</strong> তাদের বছরের পর বছরের গবেষণার সংকলন — এটি কোনো সাধারণ বই নয়, এটি একটি <strong>সম্পূর্ণ অ্যাকশন প্ল্যান</strong>।
+    <strong>Team Olive</strong> হলো একটি স্বতন্ত্র গবেষণা সত্তা, যারা দীর্ঘ সময় ধরে ক্ষমতার কাঠামো, সমাজ-বিজ্ঞান এবং বাস্তব সাফল্যের জটিল প্যাটার্নগুলো গভীরভাবে বিশ্লেষণ করে আসছে। <strong>"ক্ষমতার মহাকাব্য"</strong> তাদের সেই সুদীর্ঘ ও নিরলস গবেষণার এক অনন্য সংকলন—এটি কেবল কোনো সাধারণ বই নয়, বরং নিজের একচ্ছত্র আধিপত্য প্রতিষ্ঠার এক <strong>চূড়ান্ত ব্লুপ্রিন্ট</strong>।
   </p>
 </div>
 
@@ -838,6 +1181,21 @@ body{
   </div>
 </div>
 
+<!-- POWER QUOTE HIGHLIGHT -->
+<div class="power-quote-block">
+  <div class="pq-glow"></div>
+  <div class="pq-crown">👑</div>
+  <div class="pq-lines-top"><span></span><span></span><span></span></div>
+  <blockquote class="pq-text">
+    মনে রাখবেন — <span class="pq-highlight">"সিংহাসন কোনো উপহার নয়, এটি একটি অধিকার যা কেড়ে নিতে হয়। আর সেই অধিকার টিকিয়ে রাখার নামই ক্ষমতা।"</span>
+  </blockquote>
+  <div class="pq-lines-bot"><span></span><span></span><span></span></div>
+  <div class="pq-author">
+    <div class="pq-author-dot">🫒</div>
+    <div class="pq-author-name">Team Olive</div>
+  </div>
+</div>
+
 <!-- WHY -->
 <div class="why">
   <div class="sec-label">কেন এই বই</div>
@@ -853,26 +1211,68 @@ body{
 </div>
 
 <!-- PRICING -->
-<div class="pricing">
-  <div class="pricing-head">
-    <h3>🎁 এক্সক্লুসিভ অফার</h3>
-    <p>ফিজিক্যাল কপি ৳১,৪০০ • ইবুক ৳২০০ → <strong style="color:var(--gold-l)">আপনার জন্য মাত্র ১৭৮ টাকা!</strong></p>
+<div class="pricing pricing-v2">
+  <div class="pricing-v2-topbar">
+    <span class="ptb-tag">⚡ সীমিত সময়ের অফার</span>
+    <span class="ptb-save">৮৭% ছাড়!</span>
   </div>
+  <div class="pricing-head">
+    <div class="ph-icon">🎁</div>
+    <h3>এক্সক্লুসিভ অফার</h3>
+    <p>পুরো ৫ খণ্ড — একটিমাত্র মূল্যে</p>
+  </div>
+
+  <!-- Price comparison cards -->
+  <div class="pricing-compare">
+    <div class="pc-card pc-old">
+      <div class="pc-label">ফিজিক্যাল কপি</div>
+      <div class="pc-price">৳১,৪০০</div>
+      <div class="pc-slash"></div>
+    </div>
+    <div class="pc-arrow-wrap">
+      <div class="pc-arrow-line"></div>
+      <div class="pc-arrow-down">▼</div>
+    </div>
+    <div class="pc-card pc-mid">
+      <div class="pc-label">ইবুক মূল্য</div>
+      <div class="pc-price">৳২০০</div>
+      <div class="pc-slash"></div>
+    </div>
+    <div class="pc-arrow-wrap">
+      <div class="pc-arrow-line"></div>
+      <div class="pc-arrow-down">▼</div>
+    </div>
+    <div class="pc-card pc-hero">
+      <div class="pc-fire">🔥</div>
+      <div class="pc-label-hero">আপনার জন্য</div>
+      <div class="pc-price-hero">৳১৭৮</div>
+      <div class="pc-only-tag">শুধুমাত্র আজ!</div>
+    </div>
+  </div>
+
+  <!-- Includes -->
   <div class="pricing-body">
-    <div class="price-row">
-      <div class="pr-was"><span>ফিজিক্যাল কপি</span><strong>৳১,৪০০</strong></div>
-      <div class="pr-arrow">→</div>
-      <div class="pr-mid"><span>ইবুক মূল্য</span><strong>৳২০০</strong></div>
-      <div class="pr-arrow">→</div>
-      <div class="pr-now"><span>🔥 আপনার জন্য</span><strong>৳১৭৮</strong></div>
+    <div class="pi-title">📦 যা যা পাচ্ছেন:</div>
+    <div class="includes includes-v2">
+      <div class="inc-item"><div class="inc-check">✓</div><div class="inc-txt"><strong>সম্পূর্ণ ৫ খণ্ড PDF</strong> — ১,২৫০ পৃষ্ঠা</div></div>
+      <div class="inc-item"><div class="inc-check">✓</div><div class="inc-txt"><strong>তাৎক্ষণিক ডাউনলোড</strong> অ্যাক্সেস</div></div>
+      <div class="inc-item"><div class="inc-check">✓</div><div class="inc-txt"><strong>যেকোনো ডিভাইসে</strong> পড়তে পারবেন</div></div>
+      <div class="inc-item"><div class="inc-check">✓</div><div class="inc-txt">একবার কিনলে <strong>চিরকালের জন্য</strong></div></div>
     </div>
-    <div class="includes">
-      <div class="inc-item"><div class="inc-check">✓</div> সম্পূর্ণ ৫ খণ্ড PDF (১,২৫০ পৃষ্ঠা)</div>
-      <div class="inc-item"><div class="inc-check">✓</div> তাৎক্ষণিক ডাউনলোড অ্যাক্সেস</div>
-      <div class="inc-item"><div class="inc-check">✓</div> যেকোনো ডিভাইসে পড়তে পারবেন</div>
-      <div class="inc-item"><div class="inc-check">✓</div> একবার কিনলে চিরকালের জন্য</div>
+
+    <!-- Big CTA price badge -->
+    <div class="pricing-cta-badge">
+      <div class="pcb-left">
+        <div class="pcb-was">মূল মূল্য <s>৳১,৪০০</s></div>
+        <div class="pcb-now">মাত্র ৳<span>১৭৮</span></div>
+      </div>
+      <div class="pcb-right">
+        <div class="pcb-off">৮৭%<br><small>ছাড়</small></div>
+      </div>
     </div>
-    <button class="buy-btn" onclick="scrollToOrder()">📖 এখনই কিনুন — মাত্র ১৭৮ টাকা</button>
+
+    <button class="buy-btn buy-btn-v2" onclick="scrollToOrder()">📖 এখনই কিনুন — মাত্র ১৭৮ টাকা</button>
+    <div class="pricing-trust">🔒 নিরাপদ পেমেন্ট &nbsp;•&nbsp; ⚡ তাৎক্ষণিক অ্যাক্সেস &nbsp;•&nbsp; ✅ ১০০% নিশ্চিত</div>
   </div>
 </div>
 
