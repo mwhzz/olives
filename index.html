@@ -1371,7 +1371,7 @@ body{
       <div>PDF লোড হচ্ছে...</div>
     </div>
     <!-- ⚠️ data-src="ebook.pdf" — আপনার PDF-এর আসল URL দিন -->
-    <iframe id="pdfFrame" class="pdf-iframe" data-src="ebook.pdf" style="display:none" onload="onPdfLoad()"></iframe>
+    <iframe id="pdfFrame" ... onload="if(typeof onPdfLoad==='function')onPdfLoad()"></iframe>
   </div>
 </div>
 
@@ -1394,7 +1394,7 @@ body{
       <button class="modal-close" onclick="closePreview()">✕</button>
     </div>
     <!-- ⚠️ src="preview.pdf" — আপনার preview PDF-এর URL দিন -->
-    <iframe src="preview.pdf" class="modal-frame"></iframe>
+    <iframe src="about:blank" class="modal-frame"></iframe>
   </div>
 </div>
 
