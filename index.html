@@ -7,6 +7,26 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Noto+Sans+Bengali:wght@300;400;500;600;700;800&family=Cinzel:wght@500;600;700&display=swap" rel="stylesheet">
+
+<!-- ═══ Meta Pixel ═══ -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1637100151408251');
+fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1637100151408251&ev=PageView&noscript=1"/></noscript>
+<!-- ═══ End Meta Pixel ═══ -->
+
+<!-- ═══ Google Analytics 4 ═══ -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SEVRTQNE01"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SEVRTQNE01', { send_page_view: true });
+</script>
+<!-- ═══ End GA4 ═══ -->
+
 <style>
 /* ═══ RESET & VARS ═══ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -1069,7 +1089,6 @@ body{
 <div class="stats">
   <div class="stat"><span class="stat-n" id="sPages">০</span><div class="stat-l">পৃষ্ঠা</div></div>
   <div class="stat"><span class="stat-n" id="sChaps">০</span><div class="stat-l">অধ্যায়</div></div>
-
   <div class="stat"><span class="stat-n">৫</span><div class="stat-l">খণ্ড</div></div>
   <div class="stat"><span class="stat-n">১০০%</span><div class="stat-l">প্রয়োগযোগ্য</div></div>
 </div>
@@ -1222,7 +1241,6 @@ body{
     <p>পুরো ৫ খণ্ড — একটিমাত্র মূল্যে</p>
   </div>
 
-  <!-- Price comparison cards -->
   <div class="pricing-compare">
     <div class="pc-card pc-old">
       <div class="pc-label">ফিজিক্যাল কপি</div>
@@ -1250,7 +1268,6 @@ body{
     </div>
   </div>
 
-  <!-- Includes -->
   <div class="pricing-body">
     <div class="pi-title">📦 যা যা পাচ্ছেন:</div>
     <div class="includes includes-v2">
@@ -1260,7 +1277,6 @@ body{
       <div class="inc-item"><div class="inc-check">✓</div><div class="inc-txt">একবার কিনলে <strong>চিরকালের জন্য</strong></div></div>
     </div>
 
-    <!-- Big CTA price badge -->
     <div class="pricing-cta-badge">
       <div class="pcb-left">
         <div class="pcb-was">মূল মূল্য <s>৳১,৪০০</s></div>
@@ -1383,7 +1399,80 @@ body{
 </div>
 
 <script>
-/* ── CANVAS BACKGROUND ── */
+/* ════════════════════════════════════════════
+   TRACKING CONFIG
+   ════════════════════════════════════════════ */
+
+// ⚠️ Vercel deploy করার পরে এই URL টি আপনার actual URL দিয়ে replace করুন
+// Example: 'https://my-capi.vercel.app/api/track'
+const CAPI_URL = 'https://YOUR-APP.vercel.app/api/track';
+
+/* ── Helper: unique event ID for deduplication ── */
+function genEID() {
+  return Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
+}
+
+/* ── Helper: read cookie ── */
+function gcook(n) {
+  const m = document.cookie.match(new RegExp('(^| )' + n + '=([^;]+)'));
+  return m ? m[2] : null;
+}
+
+/* ── Master event tracker ── */
+// Fires: Browser Pixel + GA4 + Server CAPI — all with same event_id
+function trackEvent(eventName, opts) {
+  opts = opts || {};
+  const eid  = genEID();
+  const val  = opts.value    || 178;
+  const cur  = opts.currency || 'BDT';
+  const cdData = { value: val, currency: cur };
+
+  /* 1. Browser Pixel (eventID ensures deduplication with CAPI) */
+  if (window.fbq) {
+    fbq('track', eventName, cdData, { eventID: eid });
+  }
+
+  /* 2. GA4 */
+  const gaMap = {
+    ViewContent:       'view_item',
+    InitiateCheckout:  'begin_checkout',
+    AddPaymentInfo:    'add_payment_info',
+    Purchase:          'purchase',
+  };
+  if (window.gtag && gaMap[eventName]) {
+    const gaPayload = { currency: cur, value: val };
+    if (opts.txnId) gaPayload.transaction_id = opts.txnId;
+    gtag('event', gaMap[eventName], gaPayload);
+  }
+
+  /* 3. Server-Side CAPI */
+  const payload = {
+    eventName,
+    eventId:   eid,
+    phone:     window._buyerPhone || null,
+    fbp:       gcook('_fbp'),
+    fbc:       gcook('_fbc'),
+    sourceUrl: location.href,
+    value:     val,
+    currency:  cur,
+  };
+  if (opts.txnId) payload.txnId = opts.txnId;
+
+  fetch(CAPI_URL, {
+    method:  'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body:    JSON.stringify(payload),
+  }).catch(function() {}); // silent fail — never block the user
+}
+
+/* ── Fire ViewContent on page load ── */
+window.addEventListener('load', function() {
+  trackEvent('ViewContent', { value: 178 });
+});
+
+/* ════════════════════════════════════════════
+   CANVAS BACKGROUND
+   ════════════════════════════════════════════ */
 (function(){
   const c=document.getElementById('bgCanvas');
   const ctx=c.getContext('2d');
@@ -1404,12 +1493,10 @@ body{
   }
   function draw(){
     ctx.clearRect(0,0,W,H);
-    // subtle grid lines
     ctx.strokeStyle='rgba(44,95,46,0.028)';
     ctx.lineWidth=1;
     for(let x=0;x<W;x+=80){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}
     for(let y=0;y<H;y+=80){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
-    // particles
     pts.forEach(p=>{
       ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
       ctx.fillStyle=`rgba(${p.col},${p.op})`;ctx.fill();
@@ -1424,9 +1511,12 @@ body{
   window.addEventListener('resize',()=>{resize();init()});
 })();
 
-/* ── COUNTERS ── */
+/* ════════════════════════════════════════════
+   COUNTERS
+   ════════════════════════════════════════════ */
 function bn(n){return String(n).split('').map(d=>'০১২৩৪৫৬৭৮৯'[+d]).join('')}
-function counter(el,target,dur=1800){
+function counter(el,target,dur){
+  dur=dur||1800;
   let st=null;
   function step(ts){
     if(!st)st=ts;
@@ -1437,8 +1527,8 @@ function counter(el,target,dur=1800){
   }
   requestAnimationFrame(step);
 }
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
+const obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
     if(e.isIntersecting){
       counter(document.getElementById('sPages'),1250);
       counter(document.getElementById('sChaps'),119,1400);
@@ -1449,15 +1539,19 @@ const obs=new IntersectionObserver(entries=>{
 const statsEl=document.querySelector('.stats');
 if(statsEl)obs.observe(statsEl);
 
-/* ── ACCORDION ── */
+/* ════════════════════════════════════════════
+   ACCORDION
+   ════════════════════════════════════════════ */
 function toggleVol(hd){
   const item=hd.parentElement;
   const open=item.classList.contains('open');
-  document.querySelectorAll('.vol-item.open').forEach(v=>v.classList.remove('open'));
+  document.querySelectorAll('.vol-item.open').forEach(function(v){v.classList.remove('open')});
   if(!open)item.classList.add('open');
 }
 
-/* ── STICKY BAR ── */
+/* ════════════════════════════════════════════
+   STICKY BAR
+   ════════════════════════════════════════════ */
 const texts=[
   '🏆 ক্ষমতার শীর্ষে পৌঁছান','📚 ১,৪৬৭ পৃষ্ঠার জ্ঞান পান',
   '🎯 আজই সিদ্ধান্ত নিন','✨ জীবন বদলে দিন',
@@ -1467,12 +1561,12 @@ let ti=0;
 const sbEl=document.getElementById('sbText');
 function cycleTxt(){
   sbEl.style.opacity='0';
-  setTimeout(()=>{sbEl.textContent=texts[ti%texts.length];sbEl.style.opacity='1';ti++;},280);
+  setTimeout(function(){sbEl.textContent=texts[ti%texts.length];sbEl.style.opacity='1';ti++;},280);
 }
 sbEl.style.transition='opacity .28s';
 setInterval(cycleTxt,3000);
 
-window.addEventListener('scroll',()=>{
+window.addEventListener('scroll',function(){
   const bar=document.getElementById('stickyBar');
   const ord=document.getElementById('order-section');
   const pdf=document.getElementById('pdf-section');
@@ -1488,18 +1582,34 @@ function scrollToOrder(){
   el.scrollIntoView({behavior:'smooth',block:'start'});
   el.style.transition='box-shadow .3s';
   el.style.boxShadow='0 0 0 3px rgba(44,95,46,.3)';
-  setTimeout(()=>el.style.boxShadow='',1600);
+  setTimeout(function(){el.style.boxShadow=''},1600);
 }
 
-/* ── ORDER STEPS ── */
+/* ════════════════════════════════════════════
+   ORDER STEPS — with tracking
+   ════════════════════════════════════════════ */
 function goStep2(){
-  const name=document.getElementById('buyerName').value.trim();
-  const phone=document.getElementById('buyerPhone').value.trim();
+  const name  = document.getElementById('buyerName').value.trim();
+  const phone = document.getElementById('buyerPhone').value.trim();
   if(!name){alert('অনুগ্রহ করে আপনার নাম লিখুন।');return}
   if(!phone||phone.length<11){alert('সঠিক মোবাইল নম্বর দিন (১১ সংখ্যা)।');return}
+
+  // Save for CAPI user_data hashing
+  window._buyerPhone = phone;
+  window._buyerName  = name;
+
+  // 🔥 Track: user started checkout
+  trackEvent('InitiateCheckout', { value: 178 });
+
   setStep(2);
 }
-function goStep3(){setStep(3)}
+
+function goStep3(){
+  // 🔥 Track: user submitted payment
+  trackEvent('AddPaymentInfo', { value: 178 });
+  setStep(3);
+}
+
 function setStep(n){
   for(let i=1;i<=3;i++){
     document.getElementById('step'+i).classList.toggle('active',i===n);
@@ -1510,32 +1620,41 @@ function setStep(n){
   }
 }
 
-/* ── VERIFY ── */
+/* ════════════════════════════════════════════
+   VERIFY + PURCHASE EVENT
+   ════════════════════════════════════════════ */
 function verifyPayment(){
   const txn=document.getElementById('txnId').value.trim();
   if(!txn||txn.length<5){alert('সঠিক Transaction ID দিন।');return}
+
   const btn=document.getElementById('verifyBtn');
-  btn.textContent='⏳ যাচাই হচ্ছে...';btn.disabled=true;
-  setTimeout(()=>{
+  btn.textContent='⏳ যাচাই হচ্ছে...';
+  btn.disabled=true;
+
+  // 🔥 Track: PURCHASE — most important event for FB optimization
+  trackEvent('Purchase', { value: 178, currency: 'BDT', txnId: txn });
+
+  setTimeout(function(){
     document.getElementById('order-section').style.display='none';
     const pdf=document.getElementById('pdf-section');
     pdf.style.display='block';
     pdf.scrollIntoView({behavior:'smooth',block:'start'});
-    // Load PDF
-    setTimeout(()=>{
+    setTimeout(function(){
       const fr=document.getElementById('pdfFrame');
       fr.src=fr.dataset.src;
     },700);
   },1600);
 }
+
 function onPdfLoad(){
   document.getElementById('pdfLoading').style.display='none';
   const fr=document.getElementById('pdfFrame');
   fr.style.display='block';
-  fr.style.animation='pdfReveal .5s ease both';
 }
 
-/* ── PREVIEW MODAL ── */
+/* ════════════════════════════════════════════
+   PREVIEW MODAL
+   ════════════════════════════════════════════ */
 function openPreview(){document.getElementById('previewModal').classList.add('show');document.body.style.overflow='hidden'}
 function closePreview(){document.getElementById('previewModal').classList.remove('show');document.body.style.overflow=''}
 document.getElementById('previewModal').addEventListener('click',function(e){if(e.target===this)closePreview()});
