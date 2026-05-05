@@ -1323,14 +1323,14 @@ body{
       <div class="bkash-box">
         <div class="bkash-logo">💳 bKash-এ পাঠান</div>
         <!-- ⚠️ নিচের নম্বরটি আপনার bKash নম্বর দিয়ে পরিবর্তন করুন -->
-        <div class="bkash-num">01642861528</div>
+        <div class="bkash-num">01641861528</div>
         <div class="bkash-amt">পাঠান মাত্র <strong>৯৯ টাকা</strong></div>
       </div>
       <div class="bk-steps">
         <div class="bk-s"><div class="bk-num">১</div><div class="bk-t">আপনার bKash অ্যাপ খুলুন → <strong>"Send Money"</strong> সিলেক্ট করুন</div></div>
-        <div class="bk-s"><div class="bk-num">২</div><div class="bk-t">নম্বর দিন: <strong>01642861528</strong> | Amount: <strong>৯৯ টাকা</strong></div></div>
+        <div class="bk-s"><div class="bk-num">২</div><div class="bk-t">নম্বর দিন: <strong>01641861528</strong> | Amount: <strong>৯৯ টাকা</strong></div></div>
         <div class="bk-s"><div class="bk-num">৩</div><div class="bk-t">Reference-এ আপনার ফোন নম্বরটি লিখুন</div></div>
-        <div class="bk-s"><div class="bk-num">৪</div><div class="bk-t">পেমেন্ট সফল হলে <strong>SMS-এর Transaction ID</strong> সংগ্রহ করুন</div></div>
+        <div class="bk-s"><div class="bk-num">৪</div><div class="bk-t">পেমেন্ট সফল হলে আপনার bKash নম্বরের <strong>শেষ ৪ ডিজিট</strong> মনে রাখুন</div></div>
       </div>
       <button class="bk-done-btn" onclick="goStep3()">✅ পেমেন্ট করেছি — পরবর্তী ধাপ</button>
     </div>
@@ -1340,14 +1340,14 @@ body{
       <div class="fg">
         <label class="fl" for="senderBkash">যে bKash নম্বর থেকে টাকা পাঠিয়েছেন *</label>
         <input class="fi" type="tel" id="senderBkash" placeholder="01XXXXXXXXX">
-        <div class="fi-hint">এই নম্বর ও Transaction ID WhatsApp মেসেজে যাবে</div>
+        <div class="fi-hint">এই নম্বর WhatsApp মেসেজে যাবে</div>
       </div>
       <div class="fg">
-        <label class="fl" for="txnId">bKash Transaction ID *</label>
-        <input class="fi" type="text" id="txnId" placeholder="যেমন: 8AB1C2D3EF">
-        <div class="fi-hint">পেমেন্টের পরে SMS-এ Transaction ID পাবেন</div>
+        <label class="fl" for="txnId">আপনার bKash নম্বরের শেষ ৪ ডিজিট *</label>
+        <input class="fi" type="text" id="txnId" placeholder="যেমন: 1528" inputmode="numeric" maxlength="4">
+        <div class="fi-hint">শুধু আপনার bKash নম্বরের শেষ ৪ ডিজিট দিন</div>
       </div>
-      <button class="verify-btn" id="verifyBtn" onclick="sendWhatsAppOrder()">💬 WhatsApp-এ PDF চাইুন</button>
+      <button class="verify-btn" id="verifyBtn" onclick="sendWhatsAppOrder()">💬 WhatsApp-এ অর্ডার কনফার্ম করুন</button>
     </div>
 
   </div>
@@ -1358,15 +1358,15 @@ body{
   <div class="pdf-head">
     <div class="pdf-head-l">
       <h3>📖 ক্ষমতার মহাকাব্য</h3>
-      <p>WhatsApp মেসেজ পাঠালেই PDF পাঠানো হবে</p>
+      <p>WhatsApp এ অর্ডার কনফার্ম করুন এবং পিডিএফ তৎক্ষণাৎ বুঝে নিন</p>
     </div>
-    <a href="https://wa.me/8801642861528" target="_blank" rel="noopener" class="pdf-dl-btn">💬 WhatsApp খুলুন</a>
+    <a href="https://wa.me/8801641861528" target="_blank" rel="noopener" class="pdf-dl-btn">💬 WhatsApp খুলুন</a>
   </div>
   <div class="pdf-success">
     <div class="pdf-ok-icon">✅</div>
     <div class="pdf-ok-text">
       <strong>WhatsApp মেসেজ তৈরি হয়েছে!</strong>
-      মেসেজে sender bKash number ও trxID থাকবে। মেসেজ পাঠানোর পর PDF পাঠানো হবে।
+      মেসেজে sender bKash number ও শেষ ৪ ডিজিট থাকবে। মেসেজ পাঠানোর পর PDF পাঠানো হবে।
     </div>
   </div>
   <div class="pdf-viewer-wrap">
@@ -1374,7 +1374,7 @@ body{
       <div class="pdf-ok-icon">💬</div>
       <div class="pdf-ok-text">
         <strong>মেসেজটি WhatsApp-এ পাঠিয়ে দিন</strong>
-        মেসেজে আপনার নাম, ফোন, sender bKash number, trxID এবং amount থাকবে।
+        মেসেজে আপনার নাম, ফোন, sender bKash number, শেষ ৪ ডিজিট এবং amount থাকবে।
       </div>
     </div>
   </div>
@@ -1643,24 +1643,25 @@ function sendWhatsAppOrder(){
   const name=(document.getElementById('buyerName').value||window._buyerName||'').trim();
   const phone=(document.getElementById('buyerPhone').value||window._buyerPhone||'').trim();
   const senderBkash=document.getElementById('senderBkash').value.trim();
-  const txn=document.getElementById('txnId').value.trim();
+  const lastDigits=document.getElementById('txnId').value.trim();
   if(!senderBkash||senderBkash.length<11){alert('যে bKash নম্বর থেকে টাকা পাঠিয়েছেন সেটি দিন।');return}
-  if(!txn||txn.length<5){alert('সঠিক Transaction ID দিন।');return}
+  if(!/^\d{4}$/.test(lastDigits)){alert('আপনার bKash নম্বরের শেষ ৪ ডিজিট দিন।');return}
 
   const btn=document.getElementById('verifyBtn');
   btn.textContent='💬 WhatsApp খুলছে...';
   btn.disabled=true;
 
   // 🔥 Track: PURCHASE — most important event for FB optimization
-  trackEvent('Purchase', { value: PRODUCT_PRICE, currency: 'BDT', txnId: txn });
+  trackEvent('Purchase', { value: PRODUCT_PRICE, currency: 'BDT', bkashLast4: lastDigits });
 
   const message=[
-    'আসসালামু আলাইকুম, আমি ৯৯ টাকা bKash করেছি। PDF টা দিন।',
+    'আসসালামু আলাইকুম, আমি ৯৯ টাকা bKash করেছি।',
+    'WhatsApp এ অর্ডার কনফার্ম করুন এবং পিডিএফ তৎক্ষণাৎ বুঝে নিন।',
     '',
     'Name: '+name,
     'My phone: '+phone,
     'Sender bKash number: '+senderBkash,
-    'Transaction ID: '+txn,
+    'bKash last 4 digits: '+lastDigits,
     'Amount: 99 taka'
   ].join('\n');
   const whatsappUrl='https://wa.me/'+MERCHANT_WHATSAPP+'?text='+encodeURIComponent(message);
@@ -1675,7 +1676,7 @@ function sendWhatsAppOrder(){
   pdf.scrollIntoView({behavior:'smooth',block:'start'});
 
   setTimeout(function(){
-    btn.textContent='💬 WhatsApp-এ PDF চাইুন';
+    btn.textContent='💬 WhatsApp-এ অর্ডার কনফার্ম করুন';
     btn.disabled=false;
   },1200);
 }
